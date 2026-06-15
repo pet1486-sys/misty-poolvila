@@ -55,15 +55,21 @@
             </a>
         </div>
 
-        <h2 class="calendar-title">📅 ปฏิทินวันว่าง / วันจอง</h2>
-        <div class="calendar">
-            <iframe src="https://calendar.google.com/calendar/embed?src=7848fff8f64f96da3356f5681554ed8e0a9bd2cf71933aed63a58861132c449b%40group.calendar.google.com&ctz=Asia%2FBangkok"></iframe>
-        </div>
+        <!-- 📅 เซกชันปฏิทินแสดงวันว่างและราคา (เวอร์ชันแก้ไขการเข้ารหัส URL) -->
+<h2 class="calendar-title">📅 ปฏิทินวันว่าง / วันจอง และราคาที่พัก</h2>
+<div class="calendar">
+    <!-- 
+       📌 ข้อควรระวัง: 
+       - ปฏิทินแรก (วันจอง): สีแดง (#e74c3c) ใช้โค้ดสีใน URL เป็น %23e74c3c
+       - ปฏิทินสอง (ราคา): สีเขียว (#2ecc71) ใช้โค้ดสีใน URL เป็น %232ecc71
+       - เปลี่ยนเครื่องหมาย @ ในรหัสปฏิทินอันใหม่ของคุณให้กลายเป็น %40 ด้วยนะครับ
+    -->
+    <iframe src="https://calendar.google.com/calendar/embed?src=7848fff8f64f96da3356f5681554ed8e0a9bd2cf71933aed63a58861132c449b%40group.calendar.google.com&amp;color=%23007fff&amp;src=114f5d0470d1d485a4710ddc0039eaf0df346f998b00d7f1600767af3f5d3f52@group.calendar.google.com&amp;color=%23e74c3c&amp;ctz=Asia%2FBangkok"></iframe>
+</div>
 
     </div> <div class="lightbox" id="lightbox" onclick="closeLightbox()">
         <img id="lightbox-img" src="" alt="Enlarged View">
     </div>
-
     <script>
         const slider = document.getElementById('gallerySlider');
 
