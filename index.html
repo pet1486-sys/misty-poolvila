@@ -1,90 +1,221 @@
 <!DOCTYPE html>
-<html>
+<html lang="th">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Misty Poolvila</title>
+
+<style>
+
+/* ===== พื้นหลัง ===== */
+body{
+    margin:0;
+    font-family:"Georgia", serif;
+    background:url('images/bg.jpg') center/cover fixed no-repeat;
+    color:#222;
+}
+
+/* overlay */
+body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    background:rgba(255,255,255,0.75);
+    z-index:-1;
+}
+
+/* ===== Header ===== */
+header{
+    text-align:center;
+    padding:40px 20px 10px;
+}
+
+header h1{
+    font-size:42px;
+    letter-spacing:3px;
+    font-style:italic;
+    font-weight:normal;
+    margin:0;
+}
+
+/* ===== Card ===== */
+.card{
+    max-width:420px;
+    margin:20px auto;
+    background:#fff;
+    padding:20px;
+    border-radius:15px;
+    box-shadow:0 10px 25px rgba(0,0,0,0.1);
+    text-align:center;
+}
+
+/* ===== Gallery ===== */
+.gallery{
+    display:grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap:15px;
+    max-width:1000px;
+    margin:30px auto;
+    padding:0 10px;
+}
+
+.gallery img{
+    width:100%;
+    border-radius:12px;
+    box-shadow:0 6px 15px rgba(0,0,0,0.15);
+    transition:0.3s;
+    cursor:pointer;
+}
+
+.gallery img:hover{
+    transform:scale(1.03);
+}
+
+/* ===== Buttons ===== */
+.btn-group{
+    text-align:center;
+    margin:20px;
+}
+
+.btn{
+    display:inline-block;
+    padding:12px 20px;
+    margin:5px;
+    border-radius:8px;
+    color:white;
+    text-decoration:none;
+    font-weight:bold;
+    transition:0.3s;
+}
+
+.btn.fb{background:#1877F2;}
+.btn.line{background:#06C755;}
+
+.btn:hover{
+    opacity:0.85;
+    transform:translateY(-2px);
+}
+
+/* ===== Calendar ===== */
+.calendar{
+    max-width:900px;
+    margin:30px auto;
+    background:#fff;
+    border-radius:15px;
+    padding:15px;
+    box-shadow:0 10px 25px rgba(0,0,0,0.15);
+}
+
+iframe{
+    width:100%;
+    height:650px;
+    border:none;
+}
+
+/* ===== LIGHTBOX (แก้แล้ว) ===== */
+.lightbox{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,0.85);
+    display:none;
+    justify-content:center;
+    align-items:center;
+    z-index:9999;
+    padding:20px;
+}
+
+.lightbox img{
+    max-width:85%;
+    max-height:80vh;
+    width:auto;
+    height:auto;
+    border-radius:10px;
+}
+
+/* ===== มือถือ ===== */
+@media (max-width:600px){
+
+    header h1{
+        font-size:28px;
+    }
+
+    .card{
+        margin:10px;
+        padding:15px;
+    }
+
+    iframe{
+        height:450px;
+    }
+}
+
+</style>
+</head>
+
 <body>
 
-  <!-- ใช้ฟอนต์ Georgia และทำตัวหนาแบบพอดี ๆ -->
-  <h1 style="text-align:center; font-family: 'Georgia', serif; letter-spacing: 3px; color:#000000; font-weight: normal; font-style: italic;">
-    Misty Poolvila
-  </h1>
+<header>
+    <h1>Misty Poolvila</h1>
+</header>
 
-</body>
-</html>
-
-<div style="
-    max-width:350px;
-    margin:auto;
-    padding:20px;
-    border:1px solid #ddd;
-    border-radius:10px;
-    text-align:center;
-background:#f5f5f5;
-">
+<!-- ราคา -->
+<div class="card">
     <h2>🏡 ราคาที่พัก 15 ท่าน</h2>
     <p>📅 จันทร์ - พฤหัสบดี : 6,900 บาท</p>
     <p>📅 ศุกร์ - อาทิตย์ : 8,500 บาท</p>
     <p>⭐ วันเสาร์ : 10,000 บาท</p>
     <p>🎉 วันหยุดยาว : 13,000 บาท</p>
 </div>
-<p style="margin-bottom: 20px;">
-<div style="text-align: center;"> 
 
-<img src="images/S__4276231.jpg" alt="ห้องพัก" style="max-width:100%; width:400px; display:inline-block; margin:10px;">
- <img src="images/Screenshot 2026-06-15 154030.png" alt="ห้องพัก 2" style="max-width:100%; width:400px; display:inline-block; margin:10px;">
- <img src="images/S__4268055_0.jpg" alt="ห้องพัก 3" style="max-width:100%; width:400px; display:inline-block; margin:10px;">
-
-</div><p style="margin-bottom: 30px;">
-<div style="text-align:center;">
-<a href="https://www.facebook.com/GoodsDeeInterTrad"
-   target="_blank"
-   style="
-   background:#1877F2;
-   color:white;
-   padding:12px 25px;
-   text-decoration:none;
-   border-radius:8px;
-margin:auto;">
-   📘 ติดต่อผ่าน Facebook
-</a>
-<a href="https://line.me/ti/p/~YOUR_LINE_ID"
-   target="_blank"
-   style="
-   background:#06C755;
-   color:white;
-   padding:12px 25px;
-   text-decoration:none;
-   border-radius:8px;margin:10px;">
-   💬 แอดไลน์ / สอบถาม
-</a>
+<!-- รูป -->
+<div class="gallery">
+    <img src="images/S__4276231.jpg">
+    <img src="images/Screenshot 2026-06-15 154030.png">
+    <img src="images/S__4268055_0.jpg">
 </div>
 
+<!-- ปุ่ม -->
+<div class="btn-group">
+    <a class="btn fb" href="https://www.facebook.com/GoodsDeeInterTrad" target="_blank">
+        📘 Facebook
+    </a>
+
+    <a class="btn line" href="https://line.me/ti/p/~YOUR_LINE_ID" target="_blank">
+        💬 Line
+    </a>
+</div>
+
+<!-- ปฏิทิน -->
 <h2 style="text-align:center;">📅 ปฏิทินวันว่าง / วันจอง</h2>
 
-<div style="
-    max-width:900px;
-    margin:20px auto;
-    padding:15px;
-    background:#fff;
-    border-radius:15px;
-    box-shadow:0 2px 10px rgba(0,0,0,0.15);
-">
-    <iframe
-        src="https://calendar.google.com/calendar/embed?src=7848fff8f64f96da3356f5681554ed8e0a9bd2cf71933aed63a58861132c449b%40group.calendar.google.com&ctz=Asia%2FBangkok"
-        style="border:0; width:100%; height:650px;"
-        frameborder="0"
-        scrolling="no">
-    </iframe>
+<div class="calendar">
+<iframe src="https://calendar.google.com/calendar/embed?src=7848fff8f64f96da3356f5681554ed8e0a9bd2cf71933aed63a58861132c449b%40group.calendar.google.com&ctz=Asia%2FBangkok"></iframe>
 </div>
 
-<style>
-body {
-    background-image: url('images/bg.jpg');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-}
-</style>
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox">
+    <img id="lightbox-img">
+</div>
 
-<a href="https://google.com" target="_blank">
-    คลิกที่นี่
-</a>
+<script>
+
+// เปิดรูปใหญ่
+const lightbox = document.getElementById("lightbox");
+const lightboxImg = document.getElementById("lightbox-img");
+
+document.querySelectorAll(".gallery img").forEach(img => {
+    img.addEventListener("click", () => {
+        lightbox.style.display = "flex";
+        lightboxImg.src = img.src;
+    });
+});
+
+// ปิดเมื่อกดพื้นหลัง
+lightbox.addEventListener("click", () => {
+    lightbox.style.display = "none";
+});
+
+</script>
+
+</body>
+</html>
