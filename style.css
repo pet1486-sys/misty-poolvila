@@ -1,0 +1,283 @@
+/* ===== 🌌 BACKGROUND & BASE ===== */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "Georgia", "Times New Roman", serif;
+    background: url('images/bg.jpg') center/cover fixed no-repeat;
+    color: #2c3e50;
+    min-height: 100vh;
+}
+
+/* เอฟเฟกต์แผ่นฟิล์มขาวละมุนซ้อนทับภาพพื้นหลัง */
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(255,255,255,0.6), rgba(240,245,255,0.5));
+    z-index: -1;
+}
+
+/* ===== 🪄 ANIMATION ===== */
+@keyframes floaty {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+    100% { transform: translateY(0); }
+}
+
+@keyframes shine {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 200% 50%; }
+}
+
+/* ===== 🏡 HERO SECTION (ปรับให้หรูหราขึ้น) ===== */
+.hero {
+    text-align: center;
+    padding: 80px 20px 40px;
+}
+
+.hero-box {
+    display: inline-block;
+    padding: 30px 50px;
+    border-radius: 24px;
+    background: rgba(255, 255, 255, 0.45);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.08);
+    animation: floaty 4s ease-in-out infinite;
+}
+
+.hero h1 {
+    font-size: 54px;
+    letter-spacing: 2px;
+    margin: 0;
+    font-weight: 600;
+    /* ปรับ Gradient ให้สมูทขึ้นเป็นโทนฟ้า-เขียวมินต์ดูสบายตา */
+    background: linear-gradient(90deg, #1877F2, #00ba71, #1877F2);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shine 4s linear infinite;
+}
+
+/* เพิ่มคำโปรยเล็กๆ ด้านล่างชื่อโรงแรม */
+.hero::after {
+    content: "EXPERIENCE RARE LUXURY";
+    display: block;
+    margin-top: 15px;
+    font-size: 12px;
+    letter-spacing: 4px;
+    color: #5c6b73;
+    font-weight: bold;
+}
+
+/* ===== 💎 PRICE CARD (PREMIUM GLASSMORPHISM) ===== */
+.price-card {
+    max-width: 480px;
+    margin: 40px auto;
+    padding: 35px 30px;
+    border-radius: 28px;
+    /* เพิ่มความเบลอของกระจกให้ลึกและเนียนขึ้น */
+    background: linear-gradient(135deg, rgba(255,255,255,0.7), rgba(255,255,255,0.3));
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+/* เส้นสายรุ้งบางๆ ด้านบนการ์ดเพิ่มความพรีเมียม */
+.price-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: rgba(255,255,255,0.15);
+}
+
+.price-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 40px 70px rgba(0, 0, 0, 0.15);
+    border-color: rgba(255, 255, 255, 0.8);
+}
+
+.price-card h2 {
+    margin: 0 0 25px;
+    font-size: 24px;
+    color: #1e293b;
+    letter-spacing: 1px;
+}
+
+/* เปลี่ยนรายการราคาให้เป็น "แคปซูลกระจกขาว" (White Glass Pills) */
+.price-card p {
+    background: rgba(255, 255, 255, 0.75);
+    margin: 12px 0;
+    padding: 14px 20px;
+    border-radius: 50px; /* ทำทรงแคปซูล */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+    display: flex;
+    justify-content: space-between; /* จัดซ้าย-ขวาให้ตรงกันสวยงาม */
+    align-items: center;
+    font-size: 15px;
+    border: 1px solid rgba(255,255,255,0.5);
+    transition: all 0.3s ease;
+}
+
+.price-card p:hover {
+    transform: scale(1.02);
+    background: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+}
+
+.price-card b {
+    font-size: 18px;
+    color: #111;
+}
+
+/* ===== 📸 GALLERY (GRID 3 คอลัมน์สมมาตร) ===== */
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    max-width: 1000px;
+    margin: 50px auto;
+    padding: 0 20px;
+}
+
+.gallery img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover; /* บังคับให้รูปตัดพอดีกล่อง ไม่บดบังหรือเบี้ยว */
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.gallery img:hover {
+    transform: scale(1.04) translateY(-5px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+/* ===== 📱 CONTACT BUTTONS ===== */
+.btn-group {
+    text-align: center;
+    margin: 40px 20px;
+}
+
+.btn {
+    display: inline-block;
+    padding: 14px 32px;
+    margin: 8px;
+    border-radius: 50px; /* ปุ่มโค้งมนแบบโมเดิร์น */
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 15px;
+    letter-spacing: 0.5px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.btn.fb {
+    background: linear-gradient(135deg, #1877F2, #0d5ec9);
+}
+
+.btn.line {
+    background: linear-gradient(135deg, #06C755, #05ab49);
+}
+
+.btn:hover {
+    opacity: 0.95;
+    transform: translateY(-3px);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.18);
+}
+
+/* ===== 📅 CALENDAR INTERFACE ===== */
+h2[style*="text-align:center;"] {
+    font-size: 24px;
+    color: #1e293b;
+    margin-top: 60px;
+}
+
+.calendar {
+    max-width: 900px;
+    margin: 25px auto 60px;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+    border-radius: 24px;
+    padding: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+iframe {
+    width: 100%;
+    height: 600px;
+    border: none;
+    border-radius: 16px;
+}
+
+/* ===== 🎥 LIGHTBOX SYSTEM ===== */
+.lightbox {
+    position: fixed;
+    inset: 0;
+    background: rgba(15, 23, 42, 0.9); /* ปรับพื้นหลังมืดโทนน้ำเงินเข้ม */
+    backdrop-filter: blur(8px);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    padding: 20px;
+    transition: all 0.3s ease;
+}
+
+.lightbox img {
+    max-width: 90%;
+    max-height: 85vh;
+    border-radius: 20px;
+    box-shadow: 0 25px 60px rgba(0,0,0,0.5);
+}
+
+/* ===== 📐 RESPONSIVE (หน้าจอมือถือ) ===== */
+@media (max-width: 768px) {
+    .hero h1 {
+        font-size: 36px;
+    }
+    
+    .hero-box {
+        padding: 20px 30px;
+    }
+
+    .price-card {
+        margin: 20px;
+        padding: 25px 20px;
+    }
+
+    .gallery {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 12px;
+    }
+
+    .gallery img {
+        height: 180px;
+    }
+
+    iframe {
+        height: 450px;
+    }
+}
+
+/* เผื่อผู้ใช้ปิดอนิเมชันในระบบเครื่อง */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation: none !important;
+        transition: none !important;
+    }
+}
