@@ -3,11 +3,11 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Misty Poolvila</title>
+<title>Misty Poolvilla</title>
 
 <style>
 
-/* ===== พื้นหลัง ===== */
+/* ===== BACKGROUND ===== */
 body{
     margin:0;
     font-family:"Georgia", serif;
@@ -15,7 +15,6 @@ body{
     color:#222;
 }
 
-/* overlay */
 body::before{
     content:"";
     position:fixed;
@@ -24,32 +23,129 @@ body::before{
     z-index:-1;
 }
 
-/* ===== Header ===== */
-header{
+/* ===== ANIMATION ===== */
+@keyframes floaty {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+    100% { transform: translateY(0); }
+}
+
+@keyframes shine {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 200% 50%; }
+}
+
+/* ===== HERO ===== */
+.hero{
     text-align:center;
-    padding:40px 20px 10px;
+    padding:70px 20px 30px;
 }
 
-header h1{
-    font-size:42px;
-    letter-spacing:3px;
-    font-style:italic;
-    font-weight:normal;
-    margin:0;
-}
-
-/* ===== Card ===== */
-.card{
-    max-width:420px;
-    margin:20px auto;
-    background:#fff;
-    padding:20px;
+.hero-box{
+    display:inline-block;
+    padding:20px 30px;
     border-radius:15px;
-    box-shadow:0 10px 25px rgba(0,0,0,0.1);
-    text-align:center;
+
+    background: rgba(255,255,255,0.6);
+    backdrop-filter: blur(8px);
+    box-shadow:0 10px 30px rgba(0,0,0,0.15);
+
+    animation: floaty 4s ease-in-out infinite;
 }
 
-/* ===== Gallery ===== */
+.hero h1{
+    font-size:48px;
+    letter-spacing:4px;
+    margin:0;
+    font-style:italic;
+
+    background: linear-gradient(90deg, #1877F2, #06C755, #ffb347, #1877F2);
+    background-size: 200% 200%;
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+
+    animation: shine 4s linear infinite;
+}
+
+.hero p{
+    margin:8px 0 0;
+    font-size:14px;
+    letter-spacing:2px;
+    color:#333;
+}
+
+/* ===== 💎 PRICE CARD (GLASS LUXURY) ===== */
+.price-card{
+    max-width:450px;
+    margin:30px auto;
+    padding:25px;
+    border-radius:20px;
+
+    background: linear-gradient(135deg, rgba(255,255,255,0.75), rgba(255,255,255,0.35));
+    backdrop-filter: blur(12px);
+
+    border:1px solid rgba(255,255,255,0.4);
+
+    box-shadow:
+        0 20px 40px rgba(0,0,0,0.12),
+        inset 0 1px 0 rgba(255,255,255,0.5);
+
+    text-align:center;
+    position:relative;
+    overflow:hidden;
+
+    animation: floaty 5s ease-in-out infinite;
+}
+
+.price-card::before{
+    content:"";
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:5px;
+    background: linear-gradient(90deg, #1877F2, #06C755, #ffb347);
+    box-shadow: 0 0 15px rgba(24,119,242,0.5);
+}
+
+.price-card:hover{
+    transform: translateY(-8px) scale(1.01);
+    box-shadow:0 25px 60px rgba(0,0,0,0.18);
+}
+
+.price-card h2{
+    margin:10px 0 20px;
+    font-size:22px;
+}
+
+.price-card p{
+    background: rgba(255,255,255,0.8);
+    margin:10px 0;
+    padding:12px;
+    border-radius:12px;
+    box-shadow:0 6px 15px rgba(0,0,0,0.08);
+    transition:0.2s;
+}
+
+.price-card p:hover{
+    transform:scale(1.02);
+    background: rgba(255,255,255,0.95);
+}
+
+/* badge */
+.badge{
+    display:inline-block;
+    padding:5px 12px;
+    font-size:12px;
+    border-radius:20px;
+    background:#111;
+    color:#fff;
+    margin-bottom:10px;
+
+    animation: floaty 3s ease-in-out infinite;
+}
+
+/* ===== GALLERY ===== */
 .gallery{
     display:grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -63,15 +159,15 @@ header h1{
     width:100%;
     border-radius:12px;
     box-shadow:0 6px 15px rgba(0,0,0,0.15);
-    transition:0.3s;
     cursor:pointer;
+    transition:0.3s;
 }
 
 .gallery img:hover{
-    transform:scale(1.03);
+    transform:scale(1.05) translateY(-5px);
 }
 
-/* ===== Buttons ===== */
+/* ===== BUTTONS ===== */
 .btn-group{
     text-align:center;
     margin:20px;
@@ -96,7 +192,7 @@ header h1{
     transform:translateY(-2px);
 }
 
-/* ===== Calendar ===== */
+/* ===== CALENDAR ===== */
 .calendar{
     max-width:900px;
     margin:30px auto;
@@ -112,7 +208,7 @@ iframe{
     border:none;
 }
 
-/* ===== LIGHTBOX (แก้แล้ว) ===== */
+/* ===== LIGHTBOX ===== */
 .lightbox{
     position:fixed;
     inset:0;
@@ -127,25 +223,30 @@ iframe{
 .lightbox img{
     max-width:85%;
     max-height:80vh;
-    width:auto;
-    height:auto;
     border-radius:10px;
 }
 
-/* ===== มือถือ ===== */
+/* ===== MOBILE ===== */
 @media (max-width:600px){
 
-    header h1{
-        font-size:28px;
+    .hero h1{
+        font-size:30px;
     }
 
-    .card{
-        margin:10px;
-        padding:15px;
+    .price-card{
+        margin:15px;
     }
 
     iframe{
         height:450px;
+    }
+}
+
+/* reduce motion */
+@media (prefers-reduced-motion: reduce){
+    *{
+        animation:none !important;
+        transition:none !important;
     }
 }
 
@@ -154,27 +255,33 @@ iframe{
 
 <body>
 
-<header>
-    <h1>Misty Poolvila</h1>
+<!-- HERO -->
+<header class="hero">
+    <div class="hero-box">
+        <h1>Misty Poolvilla</h1>
+    </div>
 </header>
 
-<!-- ราคา -->
-<div class="card">
-    <h2>🏡 ราคาที่พัก 15 ท่าน</h2>
-    <p>📅 จันทร์ - พฤหัสบดี : 6,900 บาท</p>
-    <p>📅 ศุกร์ - อาทิตย์ : 8,500 บาท</p>
-    <p>⭐ วันเสาร์ : 10,000 บาท</p>
-    <p>🎉 วันหยุดยาว : 13,000 บาท</p>
+<!-- PRICE -->
+<div class="price-card">
+
+    <h2> ราคาที่พัก 15 ท่าน</h2>
+
+    <p>📅 จันทร์ - พฤหัสบดี : <b>6,900 บาท</b></p>
+    <p>📅 ศุกร์ - อาทิตย์ : <b>8,500 บาท</b></p>
+    <p>⭐ วันเสาร์ : <b>10,000 บาท</b></p>
+    <p>🎉 วันหยุดยาว : <b>13,000 บาท</b></p>
+
 </div>
 
-<!-- รูป -->
+<!-- GALLERY -->
 <div class="gallery">
     <img src="images/S__4276231.jpg">
     <img src="images/Screenshot 2026-06-15 154030.png">
     <img src="images/S__4268055_0.jpg">
 </div>
 
-<!-- ปุ่ม -->
+<!-- BUTTONS -->
 <div class="btn-group">
     <a class="btn fb" href="https://www.facebook.com/GoodsDeeInterTrad" target="_blank">
         📘 Facebook
@@ -185,7 +292,7 @@ iframe{
     </a>
 </div>
 
-<!-- ปฏิทิน -->
+<!-- CALENDAR -->
 <h2 style="text-align:center;">📅 ปฏิทินวันว่าง / วันจอง</h2>
 
 <div class="calendar">
@@ -199,7 +306,6 @@ iframe{
 
 <script>
 
-// เปิดรูปใหญ่
 const lightbox = document.getElementById("lightbox");
 const lightboxImg = document.getElementById("lightbox-img");
 
@@ -210,7 +316,6 @@ document.querySelectorAll(".gallery img").forEach(img => {
     });
 });
 
-// ปิดเมื่อกดพื้นหลัง
 lightbox.addEventListener("click", () => {
     lightbox.style.display = "none";
 });
