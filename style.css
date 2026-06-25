@@ -236,7 +236,7 @@ iframe {
 }
 
 /* =========================================================================
-     📸 5. MEDIA WORKSPACE ROW
+     📸 5. MEDIA WORKSPACE ROW (แสดงผล ซ้าย-ขวา แนวตั้งลื่นไหล)
      ========================================================================= */
 .media-workspace-row {
     display: flex;
@@ -249,6 +249,7 @@ iframe {
     margin-top: 5px;
 }
 
+/* ⬅️ ฝั่งซ้าย: สไลเดอร์ทรงแนวตั้ง มีขอบพรีวิวรูปถัดไปยื่นออกมาให้เห็น */
 .slider-container-box {
     flex: 2.2; 
     display: flex;
@@ -264,17 +265,18 @@ iframe {
     overflow: hidden;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
     aspect-ratio: 0.8 / 1; 
-    background: rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.15);
 }
 
+/* ✨ ปรับปรุงระบบแกลเลอรีสไลเดอร์ให้รองรับระบบ Peek View ภาพถัดไป ลื่นไหล ไม่โยกเยก */
 .gallery-slider {
     display: flex;
     overflow-x: auto;
-    scroll-snap-type: x mandatory;
+    scroll-snap-type: x mandatory; /* ล็อกหน้ากระดาษแบบเฉียบขาด */
     scroll-behavior: smooth;
     width: 100%;
     height: 100%;
-    padding: 0; 
+    padding: 0 40px 0 0; /* ✨ เว้นช่องขอบฝั่งขวาไว้ 40px เพื่อโชว์หัวรูปถัดไปให้เห็น */
     box-sizing: border-box;
     -ms-overflow-style: none;  
     scrollbar-width: none;  
@@ -282,17 +284,22 @@ iframe {
 
 .gallery-slider::-webkit-scrollbar { display: none; }
 
+/* ไอเท็มแต่ละภาพสไลด์ */
 .slide-item {
-    flex: 0 0 100%;
+    flex: 0 0 100%; /* บังคับขนาดให้เต็มหน้าต่างล็อก */
     width: 100%;
     height: 100%;
-    scroll-snap-align: center;
+    scroll-snap-align: start; /* ล็อกที่จุดเริ่มต้นของรูปภาพ */
+    scroll-snap-stop: always;
+    padding-right: 10px; /* ระยะช่องว่างเล็กๆ คั่นระหว่างภาพ */
+    box-sizing: border-box;
 }
 
 .gallery-slider img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    border-radius: 16px; /* ใส่ความโค้งมนแยกแต่ละใบให้ดูสวยงาม */
     cursor: pointer;
 }
 
@@ -317,7 +324,7 @@ iframe {
     box-shadow: 0 4px 10px rgba(0,0,0,0.08);
 }
 .slider-btn.prev { left: 10px; }
-.slider-btn.next { right: 10px; }
+.slider-btn.next { right: 50px; } /* ขยับหลบพื้นที่ของภาพพรีวิว */
 
 .slider-dots {
     display: flex;
@@ -341,6 +348,7 @@ iframe {
     border-radius: 2px;
 }
 
+/* ➡️ ฝั่งขวา: แผงควบคุมกล่องปุ่มเลือกห้องแนวตั้ง */
 .room-selector-side-scroll {
     flex: 0.8; 
     display: flex;
@@ -483,7 +491,7 @@ iframe {
 .lightbox-btn:hover { background: #ffffff; color: #0f172a; }
 
 /* =========================================================================
-     📐 7. RESPONSIVE MEDIA QUERIES
+     📐 7. RESPONSIVE MEDIA QUERIES (สำหรับหน้าจอมือถือ)
      ========================================================================= */
 @media (max-width: 850px) {
     iframe { 
@@ -506,6 +514,7 @@ iframe {
     }
     .btn { padding: 10px 6px; font-size: 11px; border-radius: 8px; }
 
+    /* ล็อกหน้าจอมือถือ ให้ภาพอยู่ซ้ายและกล่องเลือกอยู่ขวาคู่กันเสมอ */
     .media-workspace-row {
         flex-direction: row; 
         gap: 8px;
@@ -522,6 +531,14 @@ iframe {
     }
 
     .slider-btn { display: none; } 
+
+    /* ปรับแต่งความกว้างพรีวิวภาพถัดไปบนมือถือให้สมดุลพอดีสายตา */
+    .gallery-slider {
+        padding-right: 25px; /* ลดระยะพรีวิวลงมาหน่อยเพื่อให้รูปหลักแสดงเต็มขึ้นบนจอมือถือ */
+    }
+    .slide-item {
+        padding-right: 6px;
+    }
 
     .room-selector-side-scroll {
         flex: 1; 

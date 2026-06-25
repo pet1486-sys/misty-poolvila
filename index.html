@@ -20,7 +20,7 @@
         <div class="calendar-top-section">
             <h2 class="calendar-title">📅 ปฏิทินวันว่าง / วันจอง </h2>
             <div class="calendar">
-                <iframe src="https://calendar.google.com/calendar/embed?src=7848fff8f64f96da3356f5681554ed8e0a9bd2cf71933aed63a58861132c449b%40group.calendar.google.com&amp;color=%23007fff&amp;src=114f5d0470d1d485a4710ddc0039eaf0df346f998b00d7f1600767af3f5d3f52@group.calendar.google.com&amp;color=%23e74c3c&amp;ctz=Asia%2FBangkok"></iframe>
+                <iframe src="https://calendar.google.com/calendar/embed?src=7848fff8f64f96da3356f5681554ed8e0a9bd2cf71933aed63a58861132c449b%40group.calendar.google.com&color=%23007fff&src=114f5d0470d1d485a4710ddc0039eaf0df346f998b00d7f1600767af3f5d3f52@group.calendar.google.com&color=%23e74c3c&ctz=Asia%2FBangkok"></iframe>
             </div>
         </div>
 
@@ -135,6 +135,7 @@
         const slider = document.getElementById('gallerySlider');
         const dotsContainer = document.getElementById('sliderDots');
 
+        // ฟังก์ชันสร้างสไลเดอร์รูปภาพทั้งหมดรวมกัน
         function initSlider() {
             let sliderHTML = '';
             allImages.forEach((src, index) => {
@@ -151,6 +152,7 @@
             updateActiveThumbnails();
         }
 
+        // ฟังก์ชันเลื่อนปุ่มลูกศรซ้าย-ขวา
         function moveSlider(direction) {
             currentSlideIndex += direction;
 
@@ -163,23 +165,26 @@
             updateSlidePosition();
         }
 
+        // ฟังก์ชันกระโดดไปยังสไลด์ที่เลือก
         function goToSlide(slideIndex) {
             currentSlideIndex = slideIndex;
             updateSlidePosition();
         }
 
+        // ปรับปรุงสูตรคำนวณตำแหน่งให้สัมพันธ์กับระบบกล่อง Peek-View CSS แท้ๆ
         function updateSlidePosition() {
             const items = slider.querySelectorAll('.slide-item');
             if (items[currentSlideIndex]) {
-                const itemWidth = items[currentSlideIndex].clientWidth;
+                const targetScrollLeft = items[currentSlideIndex].offsetLeft - slider.offsetLeft;
                 slider.scrollTo({
-                    left: currentSlideIndex * itemWidth,
+                    left: targetScrollLeft,
                     behavior: 'smooth'
                 });
             }
             updateDotsAndThumbs();
         }
 
+        // อัปเดตสถานะไฮไลต์ของปุ่มฝั่งขวา
         function updateActiveThumbnails() {
             document.querySelectorAll('.mini-img-btn').forEach(btn => btn.classList.remove('active'));
             
@@ -204,22 +209,33 @@
             updateActiveThumbnails();
         }
 
-        let isScrolling;
-        slider.addEventListener('scroll', () => {
-            window.clearTimeout(isScrolling);
-            isScrolling = setTimeout(() => {
-                const items = slider.querySelectorAll('.slide-item');
-                if (items.length > 0) {
-                    const itemWidth = items[0].clientWidth;
-                    const newIndex = Math.round(slider.scrollLeft / itemWidth);
-                    if (newIndex !== currentSlideIndex && newIndex >= 0 && newIndex < items.length) {
-                        currentSlideIndex = newIndex;
+        // ใช้ Intersection Observer ดักจับตำแหน่งสไลด์แทนการใช้ Scroll Event แบบเดิมเพื่อความเสถียร ไม่โยกแยก
+        const observerOptions = {
+            root: slider,
+            threshold: 0.6,
+            className: 'slide-item'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const items = Array.from(slider.querySelectorAll('.slide-item'));
+                    const index = items.indexOf(entry.target);
+                    if (index !== -1 && index !== currentSlideIndex) {
+                        currentSlideIndex = index;
                         updateDotsAndThumbs();
                     }
                 }
-            }, 100);
-        });
+            });
+        }, observerOptions);
 
+        // สั่งให้คอยตรวจจับแต่ละภาพไอเท็มสไลด์
+        function setupMutationObserver() {
+            const items = slider.querySelectorAll('.slide-item');
+            items.forEach(item => observer.observe(item));
+        }
+
+        // Lightbox ขยายรูปใหญ่
         const lightbox = document.getElementById('lightbox');
         const lightboxImg = document.getElementById('lightbox-img');
         const lightboxCaption = document.getElementById('lightboxCaption');
@@ -268,6 +284,7 @@
 
         window.addEventListener('DOMContentLoaded', () => {
             initSlider();
+            setupMutationObserver();
             window.addEventListener('resize', updateSlidePosition);
         });
     </script>
