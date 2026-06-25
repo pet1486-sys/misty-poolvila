@@ -110,7 +110,7 @@ iframe {
 }
 
 /* =========================================================================
-     💎 4. BOTTOM SPLIT LAYOUT (ราคาแนวนอน + ติดต่อแนวนอนอยู่ล่าง)
+     💎 4. BOTTOM SPLIT LAYOUT
      ========================================================================= */
 .bottom-split-layout {
     display: flex;
@@ -235,32 +235,36 @@ iframe {
 }
 
 /* =========================================================================
-     📸 5. ล่างสุด: MEDIA WORKSPACE ROW (สไลเดอร์รูปภาพซ้าย + ปุ่มเลือกห้องขวา)
+     📸 5. MEDIA WORKSPACE ROW (แสดงผลแบบซ้าย-ขวา คู่กันตลอดเวลา)
      ========================================================================= */
 .media-workspace-row {
     display: flex;
-    flex-direction: row;
+    flex-direction: row; 
     justify-content: center;
-    align-items: stretch;
+    align-items: stretch; /* ให้ส่วนสูงกล่องซ้ายและขวาขยายเท่ากัน */
     gap: 15px;
     width: 100%;
     max-width: 950px; 
     margin-top: 5px;
 }
 
+/* ⬅️ ฝั่งซ้าย: กล่องภาพสไลด์แนวตั้ง (ทรง Portrait สูงโปร่งยาวเต็มตา) */
 .slider-container-box {
-    flex: 3;
+    flex: 2.2; 
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 8px;
+    min-width: 0;
 }
 
 .slider-wrapper {
     width: 100%;
     position: relative;
-    border-radius: 24px;
+    border-radius: 20px;
     overflow: hidden;
-    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+    aspect-ratio: 0.8 / 1; /* อัตราส่วนเป็นแนวตั้งสไตล์พอร์เทรต */
+    background: rgba(255, 255, 255, 0.2);
 }
 
 .gallery-slider {
@@ -269,10 +273,9 @@ iframe {
     scroll-snap-type: x mandatory;
     scroll-behavior: smooth;
     width: 100%;
-    min-height: 320px;
-    padding: 0 40px; 
+    height: 100%;
+    padding: 0; 
     box-sizing: border-box;
-    gap: 15px;
     -ms-overflow-style: none;  
     scrollbar-width: none;  
 }
@@ -282,9 +285,8 @@ iframe {
 .slide-item {
     flex: 0 0 100%;
     width: 100%;
+    height: 100%;
     scroll-snap-align: center;
-    border-radius: 20px;
-    overflow: hidden;
 }
 
 .gallery-slider img {
@@ -292,270 +294,278 @@ iframe {
     height: 100%;
     object-fit: cover;
     cursor: pointer;
-    transition: opacity 0.3s ease;
 }
 
 .slider-btn {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    background: rgba(255, 255, 255, 0.8);
+    background: rgba(255, 255, 255, 0.85);
     backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
     border: none;
     width: 36px;
     height: 36px;
     border-radius: 50%;
     cursor: pointer;
-    font-size: 13px;
+    font-size: 12px;
     display: flex;
     align-items: center;
     justify-content: center;
     z-index: 10;
-    color: #64748b;
+    color: #1e293b;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
 }
-.slider-btn.prev { left: 8px; }
-.slider-btn.next { right: 8px; }
+.slider-btn.prev { left: 10px; }
+.slider-btn.next { right: 10px; }
 
-/* 🎯 จุดไข่ปลา (Dots) บ่งบอกสถานะและจำนวนภาพ */
 .slider-dots {
     display: flex;
     justify-content: center;
-    gap: 6px;
+    flex-wrap: wrap;
+    gap: 4px;
     margin-top: 2px;
 }
 
 .slider-dots .dot {
-    width: 8px;
-    height: 8px;
+    width: 5px;
+    height: 5px;
     border-radius: 50%;
-    background: rgba(100, 116, 139, 0.3);
+    background: rgba(100, 116, 139, 0.2);
     cursor: pointer;
-    transition: all 0.25s ease;
 }
 
 .slider-dots .dot.active {
     background: #1877F2;
-    transform: scale(1.1);
-    width: 16px;
-    border-radius: 4px;
+    width: 10px;
+    border-radius: 2px;
 }
 
-/* ปุ่มเลือกห้องพักแนวตั้ง (ฝั่งขวา) */
-.room-selector-side {
-    flex: 1; 
+/* ➡️ ✨ ฝั่งขวา: แผงควบคุมกล่องปุ่มเลือกห้องแนวตั้ง (ปรับให้เว้นระยะกระจายตัวพอดีกล่องซ้าย) */
+.room-selector-side-scroll {
+    flex: 0.8; 
+    display: flex;
+    flex-direction: column; 
+    justify-content: space-between; /* ✨ กระจายระยะห่างของแต่ละห้องพักให้เว้นระยะพอดีกับความสูงฝั่งซ้าย */
+    gap: 10px;
+    padding-right: 2px;
+    box-sizing: border-box;
+}
+
+.room-thumb-group {
+    background: rgba(255, 255, 255, 0.45);
+    border-radius: 10px;
+    padding: 6px 8px;
+    border: 1px solid rgba(255,255,255,0.35);
+    flex: 1; /* ช่วยให้แต่ละกล่องห้องแชร์ความสูงเฉลี่ยเท่าๆ กัน */
     display: flex;
     flex-direction: column;
-    justify-content: space-between; 
-    gap: 8px;
-    padding-bottom: 20px; 
+    justify-content: center;
 }
 
-.room-btn {
-    width: 100%;
-    height: 100%; 
-    padding: 10px;
-    border-radius: 16px;
-    border: 1px solid rgba(24, 119, 242, 0.15);
-    background: rgba(255, 255, 255, 0.65);
-    color: #1877F2;
-    font-size: 13px;
-    font-weight: 500;
+.group-label {
+    display: block;
+    font-size: 10px;
+    font-weight: 600;
+    color: #64748b;
+    margin-bottom: 4px;
     font-family: 'Prompt', sans-serif;
+}
+
+.thumb-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+}
+
+/* ห้องที่ 4 แบ่งเป็น 2 คอลัมน์กะทัดรัด */
+.overflow-wrap-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); 
+    gap: 4px;
+}
+
+/* ปุ่มรูปภาพย่อขนาดจิ๋วพิเศษ */
+.mini-img-btn {
+    width: 28px;
+    height: 24px;
+    object-fit: cover;
+    border-radius: 4px;
     cursor: pointer;
-    transition: all 0.25s ease;
+    border: 1.5px solid rgba(100, 116, 139, 0.2);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+    transition: all 0.15s ease;
+    opacity: 0.75;
 }
 
-.room-btn:hover {
-    background: rgba(24, 119, 242, 0.05);
-    transform: translateX(2px);
+.mini-img-btn:hover {
+    opacity: 1;
+    border-color: #1877F2;
+    transform: scale(1.05);
 }
 
-.room-btn.active {
-    background: #1877F2;
-    color: white;
-    border-color: transparent;
-    box-shadow: 0 4px 12px rgba(24, 119, 242, 0.18);
+.mini-img-btn.active {
+    border-color: #1877F2;
+    opacity: 1;
+    box-shadow: 0 2px 6px rgba(24, 119, 242, 0.3);
+    transform: scale(1.02);
 }
 
 /* =========================================================================
-     🎥 6. LIGHTBOX SYSTEM STYLES (หน้าต่างขยายภาพแบบโปร่งใสและปุ่มกดง่ายบนมือถือ)
+     🎥 6. LIGHTBOX SYSTEM STYLES (ปรับโครงสร้างเพื่อใส่ข้อความใต้วิว)
      ========================================================================= */
 .lightbox {
     position: fixed; 
     inset: 0; 
-    background: rgba(15, 23, 42, 0.95);
-    backdrop-filter: blur(10px); 
+    background: rgba(15, 23, 42, 0.96);
+    backdrop-filter: blur(12px); 
     display: none; 
     justify-content: space-between;
     align-items: center; 
     z-index: 9999;
-    padding: 0 30px; /* เว้นระยะความกว้างของขอบจอ */
+    padding: 0 20px;
     box-sizing: border-box;
 }
 
-.lightbox img { 
-    max-width: 85%; 
-    max-height: 80vh; 
-    border-radius: 16px; 
-    user-select: none;
-    box-shadow: 0 10px 40px rgba(0,0,0,0.6);
-    z-index: 9999;
+/* กล่องจัดระเบียบภาพและคำอธิบายให้อยู่กลางหน้าจอ */
+.lightbox-content-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    max-width: 80%;
+    z-index: 10000;
 }
 
-/* ปุ่มปิดรูปภาพด้านบน */
+.lightbox img { 
+    max-width: 100%; 
+    max-height: 75vh; 
+    border-radius: 16px; 
+    user-select: none;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+}
+
+/* ✨ 🏷️ สไตล์ของแถบแสดงชื่อห้องและลำดับจำนวนรูปภาพด้านล่างรูปใหญ่ */
+.lightbox-caption {
+    color: #f8fafc;
+    font-size: 14px;
+    font-weight: 400;
+    font-family: 'Inter', -apple-system, sans-serif;
+    background: rgba(0, 0, 0, 0.4);
+    padding: 6px 16px;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    letter-spacing: 0.5px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
 .lightbox-close {
     position: absolute;
     top: 25px;
     right: 30px;
     color: rgba(255, 255, 255, 0.7);
     font-size: 42px;
-    font-weight: 300;
     cursor: pointer;
-    transition: all 0.2s;
+    transition: color 0.2s;
     z-index: 10002;
 }
 .lightbox-close:hover { color: #f43f5e; }
 
-/* 🎯 ปุ่มลูกศรซ้าย-ขวาเวอร์ชันโปร่งใส (Transparent & Glassmorphism) */
 .lightbox-btn {
-    position: relative;
-    background: rgba(255, 255, 255, 0.08); /* พื้นหลังโปร่งใสเนียนตา */
-    backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(5px);
+    background: rgba(255, 255, 255, 0.08); 
     border: 1px solid rgba(255, 255, 255, 0.15);
     color: rgba(255, 255, 255, 0.8);
-    font-size: 24px;
-    width: 55px;
-    height: 55px;
+    font-size: 20px;
+    width: 48px;
+    height: 48px;
     border-radius: 50%;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: all 0.25s ease;
+    transition: all 0.2s;
     z-index: 10001;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
-
-.lightbox-btn:hover {
-    background: rgba(255, 255, 255, 0.9);
-    color: #0f172a;
-    transform: scale(1.05);
-}
-
-.lightbox-btn:active {
-    transform: scale(0.95);
-    background: rgba(255, 255, 255, 0.7);
-}
+.lightbox-btn:hover { background: #ffffff; color: #0f172a; }
 
 /* =========================================================================
-     📐 7. RESPONSIVE MEDIA QUERIES (สำหรับหน้าจอมือถือไม่ให้ปุ่มล้นหลุดขอบ)
+     📐 7. RESPONSIVE MEDIA QUERIES (เวอร์ชันสำหรับหน้าจอมือถือ)
      ========================================================================= */
 @media (max-width: 850px) {
     iframe { 
-        height: 360px; 
+        height: 350px; 
     }
 
     .bottom-split-layout {
-        gap: 15px;
-        margin-bottom: 25px;
+        gap: 12px;
+        margin-bottom: 20px;
     }
 
-    .info-card-left {
-        padding: 15px 10px;
-        border-radius: 18px;
-    }
+    .info-card-left { padding: 12px; border-radius: 16px; }
+    .price-list { gap: 4px; }
+    .info-card-left p { padding: 8px 4px; font-size: 9px; border-radius: 8px; }
+    .info-card-left b { font-size: 11px; }
+    .btn { padding: 10px 4px; font-size: 10px; border-radius: 8px; }
 
-    .info-card-left h2, .info-card-right-noborder h2 {
-        font-size: 14px;
-        margin-bottom: 8px;
-    }
-
-    .price-list {
+    /* 📱 ล็อกหน้าจอมือถือ ให้ภาพอยู่ซ้ายและกล่องเลือกอยู่ขวาคู่กันเสมอ */
+    .media-workspace-row {
         flex-direction: row; 
+        gap: 8px;
+        align-items: stretch; /* ยืดกล่องฝั่งขวาบนมือถือให้สูงเท่าฝั่งซ้ายเช่นกัน */
+    }
+
+    .slider-container-box {
+        flex: 2.1; 
+    }
+
+    .slider-wrapper {
+        aspect-ratio: 0.75 / 1; 
+        border-radius: 14px;
+    }
+
+    .slider-btn { display: none; } 
+
+    /* แผงปุ่มกดฝั่งขวาแนวตั้งบนมือถือ */
+    .room-selector-side-scroll {
+        flex: 1; 
         gap: 6px;
     }
 
-    .info-card-left p {
-        padding: 10px 4px;
-        font-size: 10px;
-        border-radius: 10px;
-        gap: 4px;
+    .room-thumb-group {
+        padding: 4px 5px;
+        border-radius: 8px;
     }
 
-    .info-card-left b { font-size: 12px; }
-    
-    .btn-group-row {
-        gap: 8px;
-        max-width: 100%;
-    }
-    
-    .btn { padding: 12px 6px; font-size: 11px; border-radius: 10px; }
-
-    .media-workspace-row {
-        gap: 10px;
+    .group-label {
+        font-size: 8px;
+        margin-bottom: 2px;
     }
 
-    .gallery-slider {
-        min-height: 220px;
-        padding: 0 25px;
+    .thumb-grid {
+        gap: 2px;
     }
 
-    .slider-btn { display: none; }
-
-    .room-selector-side {
-        gap: 5px;
-        padding-bottom: 18px;
+    .overflow-wrap-grid {
+        grid-template-columns: repeat(2, 1fr); 
+        gap: 2px;
     }
 
-    .room-btn {
-        padding: 4px;
-        font-size: 11px;
-        border-radius: 10px;
+    .mini-img-btn { 
+        width: 22px;
+        height: 18px;
+        border-width: 1px;
+        border-radius: 3px;
     }
 
-    /* 📱 ส่วนจัดระเบียบปุ่มลูกศรขยายภาพบนหน้าจอมือถือ */
-    .lightbox {
-        padding: 0 10px; /* บีบพื้นที่ขอบหน้าต่างเข้าด้านในเล็กน้อย */
+    .lightbox-content-box {
+        max-width: 90%;
     }
-
-    .lightbox img { 
-        max-width: 90%; /* เพิ่มขนาดสัดส่วนการแสดงรูปบนมือถือให้เต็มตาขึ้น */
-        max-height: 75vh;
-    }
-
-    .lightbox-btn {
-        width: 44px;  /* ย่อขนาดปุ่มกดให้กะทัดรัดรับกับนิ้วมือ */
-        height: 44px;
-        font-size: 16px;
-        background: rgba(255, 255, 255, 0.12); /* เพิ่มความโปร่งแสงเนียนตา */
-        border: 1px solid rgba(255, 255, 255, 0.25);
-        position: absolute; /* ตรึงตำแหน่งลอยบนรูปภาพแบบโปร่งแสง */
-    }
-
-    /* ขยับปุ่มซ้าย-ขวาเข้ามาในพื้นที่รูปภาพเล็กน้อย ไม่ให้อยู่ไกลติดขอบจอเกินไป */
-    .lightbox-prev {
-        left: 15px;
-    }
-    .lightbox-next {
-        right: 15px;
-    }
-
-    .lightbox-close {
-        top: 15px;
-        right: 20px;
-        font-size: 36px;
-    }
+    .lightbox img { max-height: 65vh; }
+    .lightbox-caption { font-size: 12px; padding: 4px 12px; }
+    .lightbox-close { top: 15px; right: 20px; font-size: 32px; }
 }
 
 @media (max-width: 480px) {
-    iframe { height: 320px; }
-    .gallery-slider { min-height: 180px; }
-    .info-card-left p { font-size: 9px; }
-    .info-card-left b { font-size: 11px; }
-    .btn { font-size: 10px; }
-    
-    /* บนหน้าจอมือถือขนาดเล็กจิ๋ว ขยับปุ่มเข้ามาอีกเพื่อความเสถียร */
-    .lightbox-prev { left: 10px; }
-    .lightbox-next { right: 10px; }
+    iframe { height: 300px; }
 }
