@@ -75,44 +75,47 @@
 
     </div> 
     
-    <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+    <div class="lightbox" id="lightbox">
+        <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+        <button class="lightbox-btn lightbox-prev" onclick="moveLightbox(-1)">&#10094;</button>
         <img id="lightbox-img" src="" alt="Enlarged View">
+        <button class="lightbox-btn lightbox-next" onclick="moveLightbox(1)">&#10095;</button>
     </div>
 
     <script>
-        // 📦 กำหนดข้อมูลคลังรูปภาพของแต่ละห้องพัก (สามารถสไลด์ดูวนลูปได้หลายมุมมอง)
+        // 📦 คลังรูปภาพของแต่ละห้องพัก (ระบุตามชื่อไฟล์จริงที่มีในโฟลเดอร์ images ของคุณ)
         const roomImages = {
             0: ["images/room_1.1.jpg", "images/room_1.jpg"], // คลังภาพห้องที่ 1
             1: ["images/room_2.jpg", "images/room_2.1.jpg"], // คลังภาพห้องที่ 2
             2: ["images/room_3.jpg", "images/room_3.1.jpg", "images/room_3.2.jpg"], // คลังภาพห้องที่ 3
-            3: ["images/room_4.jpg", "images/room_4.1.jpg", "images/room_4.2.jpg", "images/room_4.3.jpg", "images/room_4.4.jpg"] // คลังภาพห้องที่ 4 (มี 5 ภาพ/มุมมอง)
+            3: ["images/room_4.jpg", "images/room_4.1.jpg", "images/room_4.2.jpg", "images/room_4.3.jpg", "images/room_4.4.jpg"] // คลังภาพห้องที่ 4
         };
 
         let currentRoomIndex = 0; // ห้องปัจจุบันที่เลือก
-        let currentSlideIndex = 0; // ภาพปัจจุบันในห้องนั้นๆ
+        let currentSlideIndex = 0; // ภาพปัจจุบันในสไลเดอร์หลัก
+        let currentLightboxIndex = 0; // ภาพปัจจุบันในกล่องขยายใหญ่
 
         const slider = document.getElementById('gallerySlider');
         const dotsContainer = document.getElementById('sliderDots');
 
-        // ฟังก์ชันอัปเดตและเรนเดอร์รูปภาพรวมถึงจุดไข่ปลาตามห้องที่เลือก
+        // ฟังก์ชันเรนเดอร์สไลเดอร์และจุดไข่ปลา
         function renderSlider() {
             const images = roomImages[currentRoomIndex];
             
-            // 1. สร้าง HTML สำหรับรูปภาพ
+            // 1. สร้าง HTML สำหรับรูปภาพหลัก
             let sliderHTML = '';
-            images.forEach(src => {
-                sliderHTML += `<div class="slide-item"><img src="${src}" alt="Misty Poolvilla Room" onclick="openLightbox(this.src)"></div>`;
+            images.forEach((src, index) => {
+                sliderHTML += `<div class="slide-item"><img src="${src}" alt="Misty Poolvilla Room" onclick="openLightbox(${index})"></div>`;
             });
             slider.innerHTML = sliderHTML;
 
-            // 2. สร้างจุดไข่ปลา (Dots) ตามจำนวนภาพในห้องนั้นๆ
+            // 2. สร้างจุดไข่ปลา (Dots) ตามจำนวนภาพในห้องนั้น ๆ เพื่อให้รู้ว่ามีกี่ภาพ
             let dotsHTML = '';
             images.forEach((_, idx) => {
                 dotsHTML += `<span class="dot ${idx === currentSlideIndex ? 'active' : ''}" onclick="goToSlide(${idx})"></span>`;
             });
             dotsContainer.innerHTML = dotsHTML;
 
-            // 3. เลื่อนหน้าจอไปยังสไลด์เริ่มต้นของห้อง
             scrollToSlideImmediate(currentSlideIndex);
         }
 
@@ -121,7 +124,6 @@
             currentRoomIndex = roomIndex;
             currentSlideIndex = 0; // รีเซ็ตกลับไปภาพแรกสุดของห้องนั้น
             
-            // อัปเดตสถานะปุ่มห้องฝั่งขวา
             for (let i = 0; i < 4; i++) {
                 const btn = document.getElementById(`roomBtn${i}`);
                 if (i === roomIndex) btn.classList.add('active');
@@ -131,12 +133,11 @@
             renderSlider();
         }
 
-        // ฟังก์ชันกดปุ่ม ลูกศรซ้าย-ขวา เลื่อนภาพแบบ Loop ภายในห้องตัวเอง
+        // ฟังก์ชันกดเลื่อนภาพซ้าย-ขวาบนสไลเดอร์หลัก
         function moveSlider(direction) {
             const images = roomImages[currentRoomIndex];
             currentSlideIndex += direction;
 
-            // ตรวจสอบเงื่อนไขเพื่อให้สไลด์วนลูปกลับมาเริ่มต้นใหม่ได้อัตโนมัติ
             if (currentSlideIndex >= images.length) {
                 currentSlideIndex = 0;
             } else if (currentSlideIndex < 0) {
@@ -146,24 +147,22 @@
             updateSlidePosition();
         }
 
-        // ฟังก์ชันเมื่อคลิกสลับภาพผ่านจุดไข่ปลาโดยตรง
+        // ฟังก์ชันกดผ่านจุดไข่ปลาโดยตรง
         function goToSlide(slideIndex) {
             currentSlideIndex = slideIndex;
             updateSlidePosition();
         }
 
-        // ฟังก์ชันเลื่อนภาพแบบ Smooth และอัปเดตจุดไข่ปลาทำงานควบคู่กัน
         function updateSlidePosition() {
             const items = slider.querySelectorAll('.slide-item');
             if (items[currentSlideIndex]) {
-                const itemWidth = items[currentSlideIndex].clientWidth + 15; // กว้างภาพ + gap
+                const itemWidth = items[currentSlideIndex].clientWidth + 15;
                 slider.scrollTo({
                     left: currentSlideIndex * itemWidth,
                     behavior: 'smooth'
                 });
             }
 
-            // อัปเดตสถานะ Active ของจุดไข่ปลา
             const dots = dotsContainer.querySelectorAll('.dot');
             dots.forEach((dot, idx) => {
                 if (idx === currentSlideIndex) dot.classList.add('active');
@@ -181,7 +180,6 @@
             }, 50);
         }
 
-        // รองรับระบบตรวจจับการลากสไลด์ดูรูปภาพด้วยนิ้วมือ (Swipe/Scroll) บนอุปกรณ์พกพา
         slider.addEventListener('scroll', () => {
             const items = slider.querySelectorAll('.slide-item');
             if (items.length > 0) {
@@ -199,18 +197,29 @@
             }
         });
 
-        // เปิดตัวระบบสไลด์เริ่มต้นครั้งแรกเมื่อโหลดหน้าเว็บ
-        window.addEventListener('DOMContentLoaded', () => {
-            renderSlider();
-        });
-
-        // ระบบ Lightbox แสดงผลรูปภาพขนาดใหญ่เต็มจอเมื่อคลิกที่รูปภาพ
+        // 🌟 ระบบ Lightbox ขยายภาพแล้วกดเลื่อนภาพต่อได้ 🌟
         const lightbox = document.getElementById('lightbox');
         const lightboxImg = document.getElementById('lightbox-img');
 
-        function openLightbox(src) {
-            lightboxImg.src = src;
+        function openLightbox(index) {
+            currentLightboxIndex = index;
+            const images = roomImages[currentRoomIndex];
+            lightboxImg.src = images[currentLightboxIndex];
             lightbox.style.display = 'flex';
+        }
+
+        // ฟังก์ชันกดเลื่อนภาพซ้าย-ขวา ขณะขยายรูปใหญ่
+        function moveLightbox(direction) {
+            const images = roomImages[currentRoomIndex];
+            currentLightboxIndex += direction;
+
+            if (currentLightboxIndex >= images.length) {
+                currentLightboxIndex = 0; // วนกลับไปภาพแรก
+            } else if (currentLightboxIndex < 0) {
+                currentLightboxIndex = images.length - 1; // วนไปภาพสุดท้าย
+            }
+
+            lightboxImg.src = images[currentLightboxIndex];
         }
 
         function closeLightbox() {
@@ -218,8 +227,24 @@
             lightboxImg.src = '';
         }
 
+        // ตรวจสอบพื้นที่การคลิก ถ้าคลิกพื้นหลังสีดำนอกรูปภาพ ให้ปิดหน้าต่างขยายภาพ
+        lightbox.addEventListener('click', function(e) {
+            if (e.target === lightbox) {
+                closeLightbox();
+            }
+        });
+
+        // รองรับปุ่มคีย์บอร์ด (ลูกศร ซ้าย-ขวา เพื่อเลื่อนภาพ และ Escape เพื่อปิด)
         window.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') closeLightbox();
+            if (lightbox.style.display === 'flex') {
+                if (e.key === 'Escape') closeLightbox();
+                if (e.key === 'ArrowRight') moveLightbox(1);
+                if (e.key === 'ArrowLeft') moveLightbox(-1);
+            }
+        });
+
+        window.addEventListener('DOMContentLoaded', () => {
+            renderSlider();
         });
     </script>
 
