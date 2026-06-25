@@ -1,13 +1,11 @@
 /* =========================================================================
      🌌 1. GLOBAL STYLES & MINIMALIST FONTS
      ========================================================================= */
-/* นำเข้าฟอนต์ Inter และ Prompt สไตล์มินิมอลสำหรับส่วนราคาและปุ่ม */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Prompt:wght@300;400;500;600&display=swap');
 
 body {
     margin: 0;
-    padding: 40px 20px;
-    /* ฟอนต์หลักของเว็บสำหรับส่วนราคากับข้อความทั่วไป */
+    padding: 30px 15px;
     font-family: 'Inter', 'Prompt', -apple-system, sans-serif;
     background: url('images/bg.jpg') center/cover fixed no-repeat;
     color: #334155; 
@@ -25,7 +23,7 @@ body::before {
 
 .main-container {
     width: 100%;
-    max-width: 1100px;
+    max-width: 950px;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
@@ -33,30 +31,30 @@ body::before {
 }
 
 /* =========================================================================
-     🏡 2. HERO SECTION STYLES (ส่วนหัวสไตล์ดั้งเดิม Georgia ตามที่ต้องการ)
+     🏡 2. HERO SECTION STYLES
      ========================================================================= */
 .hero {
     width: 100%;
     max-width: 600px;
     text-align: center;
-    margin-bottom: 40px;
+    margin-bottom: 25px;
 }
 
 .hero-box {
     width: 100%;
-    padding: 25px 20px;
+    padding: 20px 15px;
     box-sizing: border-box;
     border-radius: 20px;
     background: rgba(255, 255, 255, 0.5);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     border: 1px solid rgba(255, 255, 255, 0.6);
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.04);
 }
 
 .hero h1 {
-    font-size: 48px; 
-    margin: 0 0 8px 0;
+    font-size: 42px; 
+    margin: 0 0 6px 0;
     font-weight: bold;
     font-family: "Georgia", "Times New Roman", serif; 
     background: linear-gradient(90deg, #1877F2, #00ba71);
@@ -74,29 +72,197 @@ body::before {
 }
 
 /* =========================================================================
-     🔄 3. LAYOUT STRUCTURE
+     📅 3. CALENDAR TOP SECTION (ปฏิทินด้านบนสุด)
      ========================================================================= */
-.content-row {
+.calendar-top-section {
+    width: 100%;
+    max-width: 950px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 12px; 
+}
+
+.calendar-title { 
+    font-size: 18px; 
+    color: #1e293b; 
+    margin: 0 0 12px 0; 
+    text-align: center;
+    font-weight: 500;
+}
+
+.calendar {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.45);
+    backdrop-filter: blur(15px);
+    border-radius: 24px;
+    padding: 12px;
+    box-sizing: border-box;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+}
+
+iframe { 
+    width: 100%; 
+    height: 420px; 
+    border: none; 
+    border-radius: 16px; 
+}
+
+/* =========================================================================
+     💎 4. BOTTOM SPLIT LAYOUT (ราคาแนวนอนชิดปฏิทิน + ติดต่ออยู่ล่างสุด)
+     ========================================================================= */
+.bottom-split-layout {
+    display: flex;
+    flex-direction: column; 
+    align-items: center;
+    gap: 15px; 
+    width: 100%;
+    max-width: 950px;
+    margin-bottom: 35px;
+}
+
+/* 💰 กล่องราคาที่พักแนวนอน */
+.info-card-left {
+    width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+    border-radius: 24px;
+    background: rgba(255, 255, 255, 0.55);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid transparent;
+    background-clip: padding-box;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.info-card-left::after {
+    content: '';
+    position: absolute;
+    top: -1px; bottom: -1px; left: -1px; right: -1px;
+    background: linear-gradient(135deg, #1877F2, rgba(255,255,255,0.5), #00ba71); 
+    border-radius: 24px;
+    z-index: -1;
+    opacity: 0.35; 
+}
+
+.info-card-left h2 { 
+    margin: 0 0 12px 0; 
+    font-size: 15px; 
+    color: #1e293b; 
+    font-weight: 500;
+    text-align: center;
+}
+
+.price-list {
+    display: flex;
+    flex-direction: row; 
+    gap: 10px;
+    width: 100%;
+    justify-content: center;
+}
+
+.info-card-left p {
+    flex: 1;
+    background: rgba(255, 255, 255, 0.65);
+    margin: 0;
+    padding: 12px 10px;
+    border-radius: 14px; 
+    display: flex;
+    flex-direction: column; 
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    color: #475569;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    text-align: center;
+}
+
+.info-card-left b { 
+    font-size: 15px; 
+    color: #0f172a; 
+    font-weight: 600;
+}
+
+/* 📱 บล็อกช่องทางการติดต่อ (ไม่มีกรอบ) */
+.info-card-right-noborder {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.info-card-right-noborder h2 {
+    margin: 0 0 10px 0; 
+    font-size: 15px; 
+    color: #1e293b; 
+    font-weight: 500;
+    text-align: center;
+}
+
+.btn-group-row {
+    display: flex;
+    flex-direction: row; 
+    gap: 10px;
+    width: 100%;
+    max-width: 600px; 
+    justify-content: center;
+}
+
+.btn {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 15px;
+    border-radius: 14px; 
+    font-weight: 500;
+    font-size: 13px;
+    text-decoration: none;
+    transition: all 0.25s ease;
+    white-space: nowrap;
+}
+
+.btn.fb { background: rgba(255, 255, 255, 0.75); color: #1877F2; border: 1px solid rgba(24, 119, 242, 0.15); box-shadow: 0 4px 10px rgba(24, 119, 242, 0.02); }
+.btn.line { background: rgba(255, 255, 255, 0.75); color: #06C755; border: 1px solid rgba(6, 199, 85, 0.15); box-shadow: 0 4px 10px rgba(6, 199, 85, 0.02); }
+.btn.phone { background: rgba(255, 255, 255, 0.75); color: #334155; border: 1px solid rgba(51, 65, 85, 0.15); box-shadow: 0 4px 10px rgba(51, 65, 85, 0.02); }
+
+.btn:hover {
+    transform: translateY(-2px);
+    background: #ffffff;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.05);
+}
+
+/* =========================================================================
+     📸 5. ล่างสุด: MEDIA WORKSPACE ROW (สไลเดอร์รูปภาพซ้าย + ปุ่มเลือกห้องแนวตั้งขวา)
+     ========================================================================= */
+.media-workspace-row {
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: stretch;
-    gap: 30px;
+    gap: 15px;
     width: 100%;
-    max-width: 1050px;
-    margin-bottom: 30px;
+    max-width: 950px; 
+    margin-top: 5px;
 }
 
-/* =========================================================================
-     📸 4. SLIDER SYSTEM STYLES
-     ========================================================================= */
+.slider-container-box {
+    flex: 3;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
 .slider-wrapper {
-    flex: 1;
-    max-width: 500px;
+    width: 100%;
     position: relative;
     border-radius: 24px;
     overflow: hidden;
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.06);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.05);
 }
 
 .gallery-slider {
@@ -105,17 +271,15 @@ body::before {
     scroll-snap-type: x mandatory;
     scroll-behavior: smooth;
     width: 100%;
-    min-height: 380px;
-    padding: 0 45px; 
+    min-height: 320px;
+    padding: 0 40px; 
     box-sizing: border-box;
     gap: 15px;
     -ms-overflow-style: none;  
     scrollbar-width: none;  
 }
 
-.gallery-slider::-webkit-scrollbar {
-    display: none;
-}
+.gallery-slider::-webkit-scrollbar { display: none; }
 
 .slide-item {
     flex: 0 0 100%;
@@ -130,12 +294,7 @@ body::before {
     height: 100%;
     object-fit: cover;
     cursor: pointer;
-    opacity: 1;
     transition: opacity 0.3s ease;
-}
-
-.gallery-slider:active img {
-    opacity: 0.6;
 }
 
 .slider-btn {
@@ -145,72 +304,61 @@ body::before {
     background: rgba(255, 255, 255, 0.8);
     backdrop-filter: blur(8px);
     border: none;
-    width: 38px;
-    height: 38px;
+    width: 36px;
+    height: 36px;
     border-radius: 50%;
     cursor: pointer;
-    font-size: 14px;
+    font-size: 13px;
     display: flex;
     align-items: center;
     justify-content: center;
     z-index: 10;
-    transition: all 0.2s;
     color: #64748b;
 }
-.slider-btn:hover { background: #ffffff; scale: 1.05; color: #1e293b; }
 .slider-btn.prev { left: 8px; }
 .slider-btn.next { right: 8px; }
 
-/* =========================================================================
-     💎 5. PRICE CARD & SELECTOR STYLES (อัปเดตเส้นขอบโทนฟ้า-มินต์พรีเมียม)
-     ========================================================================= */
-.price-card {
-    flex: 1;
-    max-width: 500px;
-    padding: 30px;
-    box-sizing: border-box;
-    border-radius: 24px;
-    background: rgba(255, 255, 255, 0.55);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    /* เปิดทางให้เทคนิค ::after วาดขอบล้อมกรอบได้เนียน ๆ */
-    border: 1px solid transparent;
-    background-clip: padding-box;
-    text-align: center;
-    position: relative;
-}
-
-/* 🎯 โค้ดเส้นขอบสีฟ้า-มินต์บาง ๆ ที่คุณต้องการเพิ่ม */
-.price-card::after {
-    content: '';
-    position: absolute;
-    top: -1px; bottom: -1px; left: -1px; right: -1px;
-    background: linear-gradient(135deg, #1877F2, rgba(255,255,255,0.5), #00ba71); 
-    border-radius: 24px;
-    z-index: -1;
-    opacity: 0.4; 
-}
-
-.price-card h2 { 
-    margin: 0 0 20px 0; 
-    font-size: 20px; 
-    color: #1e293b; 
-    font-weight: 500;
-    letter-spacing: -0.3px;
-}
-
-.room-selector {
+/* 🎯 สไตล์สัญลักษณ์จุดไข่ปลา (Dots) บ่งบอกสถานะจำนวนรูปภาพภายในห้อง */
+.slider-dots {
     display: flex;
     justify-content: center;
+    gap: 6px;
+    margin-top: 2px;
+}
+
+.slider-dots .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgba(100, 116, 139, 0.3);
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+.slider-dots .dot.active {
+    background: #1877F2;
+    transform: scale(1.2);
+    width: 16px; /* ขยายความกว้างจุดแอคทีฟสไตล์โมเดิร์น */
+    border-radius: 4px;
+}
+
+/* ปุ่มเลือกห้องพักแนวตั้ง (ฝั่งขวา) */
+.room-selector-side {
+    flex: 1; 
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; 
     gap: 8px;
-    margin-bottom: 25px;
+    padding-bottom: 20px; /* ชดเชยความสูงให้บาลานซ์กับจุดไข่ปลาด้านซ้าย */
 }
 
 .room-btn {
-    padding: 8px 16px;
-    border-radius: 30px;
-    border: 1px solid rgba(24, 119, 242, 0.2);
-    background: rgba(255, 255, 255, 0.7);
+    width: 100%;
+    height: 100%; 
+    padding: 10px;
+    border-radius: 16px;
+    border: 1px solid rgba(24, 119, 242, 0.15);
+    background: rgba(255, 255, 255, 0.65);
     color: #1877F2;
     font-size: 13px;
     font-weight: 500;
@@ -221,99 +369,18 @@ body::before {
 
 .room-btn:hover {
     background: rgba(24, 119, 242, 0.05);
+    transform: translateX(2px);
 }
 
 .room-btn.active {
     background: #1877F2;
     color: white;
     border-color: transparent;
-    box-shadow: 0 4px 15px rgba(24, 119, 242, 0.2);
-}
-
-.price-card p {
-    background: rgba(255, 255, 255, 0.65);
-    margin: 10px 0;
-    padding: 14px 22px;
-    border-radius: 16px; 
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 14px;
-    font-weight: 400;
-    color: #475569;
-    border: 1px solid rgba(255, 255, 255, 0.4);
-}
-
-.price-card b { 
-    font-size: 16px; 
-    color: #0f172a; 
-    font-weight: 600;
+    box-shadow: 0 4px 12px rgba(24, 119, 242, 0.18);
 }
 
 /* =========================================================================
-     📱 6. CONTACT BUTTONS INTERFACE
-     ========================================================================= */
-.btn-group {
-    display: flex;
-    justify-content: center;
-    gap: 12px;
-    margin: 30px 0;
-    width: 100%;
-    max-width: 850px;
-}
-
-.btn {
-    flex: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 12px 25px;
-    border-radius: 14px; 
-    font-weight: 500;
-    font-size: 14px;
-    text-decoration: none;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
-    transition: all 0.25s ease;
-    border: 1px solid rgba(255, 255, 255, 0.5);
-    white-space: nowrap;
-}
-
-.btn.fb { background: rgba(255, 255, 255, 0.75); color: #1877F2; }
-.btn.line { background: rgba(255, 255, 255, 0.75); color: #06C755; }
-.btn.phone { background: rgba(255, 255, 255, 0.75); color: #334155; }
-
-.btn:hover {
-    transform: translateY(-1px);
-    background: #ffffff;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
-}
-
-/* =========================================================================
-     📅 7. GOOGLE CALENDAR EMBED BOX
-     ========================================================================= */
-.calendar-title { 
-    font-size: 18px; 
-    color: #1e293b; 
-    margin: 40px 0 15px 0; 
-    text-align: center;
-    font-weight: 500;
-}
-
-.calendar {
-    width: 100%;
-    max-width: 900px;
-    background: rgba(255, 255, 255, 0.45);
-    backdrop-filter: blur(15px);
-    border-radius: 24px;
-    padding: 15px;
-    box-sizing: border-box;
-    border: 1px solid rgba(255, 255, 255, 0.5);
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.03);
-}
-iframe { width: 100%; height: 500px; border: none; border-radius: 16px; }
-
-/* =========================================================================
-     🎥 8. LIGHTBOX SYSTEM STYLES
+     🎥 6. LIGHTBOX SYSTEM STYLES
      ========================================================================= */
 .lightbox {
     position: fixed; inset: 0; background: rgba(15, 23, 42, 0.8);
@@ -323,76 +390,77 @@ iframe { width: 100%; height: 500px; border: none; border-radius: 16px; }
 .lightbox img { max-width: 90%; max-height: 80vh; border-radius: 16px; }
 
 /* =========================================================================
-     📐 9. MOBILE & TABLET MEDIA QUERIES
+     📐 7. RESPONSIVE MEDIA QUERIES (สำหรับหน้าจอมือถือไม่ให้เบลอหรือเพี้ยน)
      ========================================================================= */
 @media (max-width: 850px) {
-    .content-row {
-        flex-direction: column;
-        align-items: center;
-        gap: 25px;
+    iframe { 
+        height: 360px; 
+    }
+
+    .bottom-split-layout {
+        gap: 15px;
+        margin-bottom: 25px;
+    }
+
+    .info-card-left {
+        padding: 15px 10px;
+        border-radius: 18px;
+    }
+
+    .info-card-left h2, .info-card-right-noborder h2 {
+        font-size: 14px;
+        margin-bottom: 8px;
+    }
+
+    .price-list {
+        flex-direction: row; 
+        gap: 6px;
+    }
+
+    .info-card-left p {
+        padding: 10px 4px;
+        font-size: 10px;
+        border-radius: 10px;
+        gap: 4px;
+    }
+
+    .info-card-left b { font-size: 12px; }
+    
+    .btn-group-row {
+        gap: 8px;
+        max-width: 100%;
     }
     
-    .price-card, .slider-wrapper {
-        width: 100%;
-        max-width: 100%;
-        box-sizing: border-box;
-    }
+    .btn { padding: 12px 6px; font-size: 11px; border-radius: 10px; }
 
-    .price-card {
-        padding: 25px 15px;
-        background: rgba(255, 255, 255, 0.88);
-    }
-
-    .room-selector {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 6px;
-        width: 100%;
-        margin-bottom: 20px;
-    }
-
-    .room-btn {
-        padding: 10px 4px;
-        font-size: 12px;
-    }
-
-    .price-card p {
-        padding: 14px 15px;
-        font-size: 13px;
-        gap: 5px;
-        border-radius: 14px;
-    }
-
-    .price-card b {
-        font-size: 15px; 
-        white-space: nowrap; 
-        font-weight: 600;
+    /* โครงสร้างล่างสุด รูปภาพซ้าย + ปุ่มขวา บนมือถือ */
+    .media-workspace-row {
+        gap: 10px;
     }
 
     .gallery-slider {
-        min-height: 280px;
-        padding: 0 35px; 
+        min-height: 220px;
+        padding: 0 25px;
     }
 
-    .slider-btn {
-        display: none;
+    .slider-btn { display: none; }
+
+    .room-selector-side {
+        gap: 5px;
+        padding-bottom: 18px;
     }
 
-    .btn-group {
-        flex-direction: column;
-        width: 100%;
-        max-width: 100%;
-        gap: 8px;
+    .room-btn {
+        padding: 4px;
+        font-size: 11px;
+        border-radius: 10px;
     }
+}
 
-    .btn {
-        width: 100%;
-        box-sizing: border-box;
-        padding: 14px;
-        border-radius: 14px;
-    }
-    
-    iframe {
-        height: 400px;
-    }
+@media (max-width: 480px) {
+    iframe { height: 320px; }
+    .gallery-slider { min-height: 180px; }
+    .info-card-left p { font-size: 9px; }
+    .info-card-left b { font-size: 11px; }
+    .btn { font-size: 10px; }
 }

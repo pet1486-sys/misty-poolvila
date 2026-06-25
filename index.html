@@ -17,29 +17,17 @@
             </div>
         </header>
 
-        <div class="content-row">
-            
-            <div class="slider-wrapper">
-                <div class="gallery-slider" id="gallerySlider">
-                    <div class="slide-item"><img src="images/room_1.1.jpg" alt="Misty Poolvilla 1" onclick="openLightbox(this.src)"></div>
-                    <div class="slide-item"><img src="images/room_2.jpg" alt="Misty Poolvilla 2" onclick="openLightbox(this.src)"></div>
-                    <div class="slide-item"><img src="images/room_3.jpg" alt="Misty Poolvilla 3" onclick="openLightbox(this.src)"></div>
-                    <div class="slide-item"><img src="images/room_4.jpg" alt="Misty Poolvilla 4" onclick="openLightbox(this.src)"></div>
-                </div>
-                <button class="slider-btn prev" onclick="moveSlider(-1)">&#10094;</button>
-                <button class="slider-btn next" onclick="moveSlider(1)">&#10095;</button>
+        <div class="calendar-top-section">
+            <h2 class="calendar-title">📅 ปฏิทินวันว่าง / วันจอง </h2>
+            <div class="calendar">
+                <iframe src="https://calendar.google.com/calendar/embed?src=7848fff8f64f96da3356f5681554ed8e0a9bd2cf71933aed63a58861132c449b%40group.calendar.google.com&amp;color=%23007fff&amp;src=114f5d0470d1d485a4710ddc0039eaf0df346f998b00d7f1600767af3f5d3f52@group.calendar.google.com&amp;color=%23e74c3c&amp;ctz=Asia%2FBangkok"></iframe>
             </div>
+        </div>
 
-            <div class="price-card">
-                <h2>ราคาที่พัก</h2>
-                
-                <div class="room-selector">
-                    <button class="room-btn active" onclick="scrollToRoom(0)">ห้องที่ 1</button>
-                    <button class="room-btn" onclick="scrollToRoom(1)">ห้องที่ 2</button>
-                    <button class="room-btn" onclick="scrollToRoom(2)">ห้องที่ 3</button>
-                    <button class="room-btn" onclick="scrollToRoom(3)">ห้องที่ 4</button>
-                </div>
-
+        <div class="bottom-split-layout">
+            
+            <div class="info-card-left">
+                <h2>💰 ราคาที่พัก</h2>
                 <div class="price-list">
                     <p><span>📅 จันทร์ - พฤหัสบดี :</span> <b>6,900 บาท</b></p>
                     <p><span>📅 ศุกร์ - อาทิตย์ :</span> <b>8,500 บาท</b></p>
@@ -47,82 +35,176 @@
                 </div>
             </div>
 
-        </div> <div class="btn-group">
-            <a class="btn fb" href="https://www.facebook.com/mistyfieldpoolvilla" target="_blank">
-                📘 Facebook
-            </a>
-            <a class="btn line" href="https://lin.ee/RWJQMLN" target="_blank">
-                💬 Line
-            </a>
-            <a class="btn phone" href="tel:0843410869">
-                📞 โทร: 084-341-0869
-            </a>
+            <div class="info-card-right-noborder">
+                <h2>📱 ช่องทางการติดต่อ / จองห้องพัก</h2>
+                <div class="btn-group-row">
+                    <a class="btn fb" href="https://www.facebook.com/mistyfieldpoolvilla" target="_blank">
+                        📘 Facebook
+                    </a>
+                    <a class="btn line" href="https://lin.ee/RWJQMLN" target="_blank">
+                        💬 Line
+                    </a>
+                    <a class="btn phone" href="tel:0843410869">
+                        📞 โทร: 084-341-0869
+                    </a>
+                </div>
+            </div>
+
         </div>
 
-        <h2 class="calendar-title">📅 ปฏิทินวันว่าง / วันจอง </h2>
-<div class="calendar">
-    <!-- 
-       📌 ข้อควรระวัง: 
-       - ปฏิทินแรก (วันจอง): สีแดง (#e74c3c) ใช้โค้ดสีใน URL เป็น %23e74c3c
-       - ปฏิทินสอง (ราคา): สีเขียว (#2ecc71) ใช้โค้ดสีใน URL เป็น %232ecc71
-       - เปลี่ยนเครื่องหมาย @ ในรหัสปฏิทินอันใหม่ของคุณให้กลายเป็น %40 ด้วยนะครับ
-    -->
-    <iframe src="https://calendar.google.com/calendar/embed?src=7848fff8f64f96da3356f5681554ed8e0a9bd2cf71933aed63a58861132c449b%40group.calendar.google.com&amp;color=%23007fff&amp;src=114f5d0470d1d485a4710ddc0039eaf0df346f998b00d7f1600767af3f5d3f52@group.calendar.google.com&amp;color=%23e74c3c&amp;ctz=Asia%2FBangkok"></iframe>
-</div>
+        <div class="media-workspace-row">
+            
+            <div class="slider-container-box">
+                <div class="slider-wrapper">
+                    <div class="gallery-slider" id="gallerySlider">
+                        </div>
+                    <button class="slider-btn prev" onclick="moveSlider(-1)">&#10094;</button>
+                    <button class="slider-btn next" onclick="moveSlider(1)">&#10095;</button>
+                </div>
+                <div class="slider-dots" id="sliderDots"></div>
+            </div>
 
+            <div class="room-selector-side">
+                <button class="room-btn active" id="roomBtn0" onclick="changeRoom(0)">ห้องที่ 1</button>
+                <button class="room-btn" id="roomBtn1" onclick="changeRoom(1)">ห้องที่ 2</button>
+                <button class="room-btn" id="roomBtn2" onclick="changeRoom(2)">ห้องที่ 3</button>
+                <button class="room-btn" id="roomBtn3" onclick="changeRoom(3)">ห้องที่ 4</button>
+            </div>
 
-    </div> <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+        </div> 
+
+    </div> 
+    
+    <div class="lightbox" id="lightbox" onclick="closeLightbox()">
         <img id="lightbox-img" src="" alt="Enlarged View">
     </div>
 
     <script>
+        // 📦 กำหนดข้อมูลคลังรูปภาพของแต่ละห้องพัก (สามารถสไลด์ดูวนลูปได้หลายมุมมอง)
+        const roomImages = {
+            0: ["images/room_1.1.jpg", "images/room_1.jpg"], // คลังภาพห้องที่ 1
+            1: ["images/room_2.jpg", "images/room_2.1.jpg"], // คลังภาพห้องที่ 2
+            2: ["images/room_3.jpg", "images/room_3.1.jpg", "images/room_3.2.jpg"], // คลังภาพห้องที่ 3
+            3: ["images/room_4.jpg", "images/room_4.1.jpg", "images/room_4.2.jpg", "images/room_4.3.jpg", "images/room_4.4.jpg"] // คลังภาพห้องที่ 4 (มี 5 ภาพ/มุมมอง)
+        };
+
+        let currentRoomIndex = 0; // ห้องปัจจุบันที่เลือก
+        let currentSlideIndex = 0; // ภาพปัจจุบันในห้องนั้นๆ
+
         const slider = document.getElementById('gallerySlider');
+        const dotsContainer = document.getElementById('sliderDots');
 
-        function scrollToRoom(index) {
-            const items = slider.querySelectorAll('.slide-item');
-            if(items[index]) {
-                const itemWidth = items[index].clientWidth + 15; 
-                slider.scrollTo({
-                    left: index * itemWidth,
-                    behavior: 'smooth'
-                });
-                updateActiveButton(index);
-            }
-        }
-
-        function moveSlider(direction) {
-            const items = slider.querySelectorAll('.slide-item');
-            const itemWidth = items[0].clientWidth + 15;
+        // ฟังก์ชันอัปเดตและเรนเดอร์รูปภาพรวมถึงจุดไข่ปลาตามห้องที่เลือก
+        function renderSlider() {
+            const images = roomImages[currentRoomIndex];
             
-            let currentIndex = Math.round(slider.scrollLeft / itemWidth);
-            let nextIndex = currentIndex + direction;
+            // 1. สร้าง HTML สำหรับรูปภาพ
+            let sliderHTML = '';
+            images.forEach(src => {
+                sliderHTML += `<div class="slide-item"><img src="${src}" alt="Misty Poolvilla Room" onclick="openLightbox(this.src)"></div>`;
+            });
+            slider.innerHTML = sliderHTML;
 
-            if (nextIndex >= 0 && nextIndex < items.length) {
-                slider.scrollTo({
-                    left: nextIndex * itemWidth,
-                    behavior: 'smooth'
-                });
-                updateActiveButton(nextIndex);
-            }
+            // 2. สร้างจุดไข่ปลา (Dots) ตามจำนวนภาพในห้องนั้นๆ
+            let dotsHTML = '';
+            images.forEach((_, idx) => {
+                dotsHTML += `<span class="dot ${idx === currentSlideIndex ? 'active' : ''}" onclick="goToSlide(${idx})"></span>`;
+            });
+            dotsContainer.innerHTML = dotsHTML;
+
+            // 3. เลื่อนหน้าจอไปยังสไลด์เริ่มต้นของห้อง
+            scrollToSlideImmediate(currentSlideIndex);
         }
 
-        function updateActiveButton(index) {
-            const buttons = document.querySelectorAll('.room-btn');
-            buttons.forEach((btn, i) => {
-                if(i === index) btn.classList.add('active');
+        // ฟังก์ชันสลับห้องพัก
+        function changeRoom(roomIndex) {
+            currentRoomIndex = roomIndex;
+            currentSlideIndex = 0; // รีเซ็ตกลับไปภาพแรกสุดของห้องนั้น
+            
+            // อัปเดตสถานะปุ่มห้องฝั่งขวา
+            for (let i = 0; i < 4; i++) {
+                const btn = document.getElementById(`roomBtn${i}`);
+                if (i === roomIndex) btn.classList.add('active');
                 else btn.classList.remove('active');
+            }
+
+            renderSlider();
+        }
+
+        // ฟังก์ชันกดปุ่ม ลูกศรซ้าย-ขวา เลื่อนภาพแบบ Loop ภายในห้องตัวเอง
+        function moveSlider(direction) {
+            const images = roomImages[currentRoomIndex];
+            currentSlideIndex += direction;
+
+            // ตรวจสอบเงื่อนไขเพื่อให้สไลด์วนลูปกลับมาเริ่มต้นใหม่ได้อัตโนมัติ
+            if (currentSlideIndex >= images.length) {
+                currentSlideIndex = 0;
+            } else if (currentSlideIndex < 0) {
+                currentSlideIndex = images.length - 1;
+            }
+
+            updateSlidePosition();
+        }
+
+        // ฟังก์ชันเมื่อคลิกสลับภาพผ่านจุดไข่ปลาโดยตรง
+        function goToSlide(slideIndex) {
+            currentSlideIndex = slideIndex;
+            updateSlidePosition();
+        }
+
+        // ฟังก์ชันเลื่อนภาพแบบ Smooth และอัปเดตจุดไข่ปลาทำงานควบคู่กัน
+        function updateSlidePosition() {
+            const items = slider.querySelectorAll('.slide-item');
+            if (items[currentSlideIndex]) {
+                const itemWidth = items[currentSlideIndex].clientWidth + 15; // กว้างภาพ + gap
+                slider.scrollTo({
+                    left: currentSlideIndex * itemWidth,
+                    behavior: 'smooth'
+                });
+            }
+
+            // อัปเดตสถานะ Active ของจุดไข่ปลา
+            const dots = dotsContainer.querySelectorAll('.dot');
+            dots.forEach((dot, idx) => {
+                if (idx === currentSlideIndex) dot.classList.add('active');
+                else dot.classList.remove('active');
             });
         }
 
+        function scrollToSlideImmediate(slideIndex) {
+            setTimeout(() => {
+                const items = slider.querySelectorAll('.slide-item');
+                if (items[slideIndex]) {
+                    const itemWidth = items[slideIndex].clientWidth + 15;
+                    slider.scrollLeft = slideIndex * itemWidth;
+                }
+            }, 50);
+        }
+
+        // รองรับระบบตรวจจับการลากสไลด์ดูรูปภาพด้วยนิ้วมือ (Swipe/Scroll) บนอุปกรณ์พกพา
         slider.addEventListener('scroll', () => {
             const items = slider.querySelectorAll('.slide-item');
-            if(items.length > 0) {
+            if (items.length > 0) {
                 const itemWidth = items[0].clientWidth + 15;
-                const currentIndex = Math.round(slider.scrollLeft / itemWidth);
-                updateActiveButton(currentIndex);
+                const newIndex = Math.round(slider.scrollLeft / itemWidth);
+                
+                if (newIndex !== currentSlideIndex && newIndex >= 0 && newIndex < items.length) {
+                    currentSlideIndex = newIndex;
+                    const dots = dotsContainer.querySelectorAll('.dot');
+                    dots.forEach((dot, idx) => {
+                        if (idx === currentSlideIndex) dot.classList.add('active');
+                        else dot.classList.remove('active');
+                    });
+                }
             }
         });
 
+        // เปิดตัวระบบสไลด์เริ่มต้นครั้งแรกเมื่อโหลดหน้าเว็บ
+        window.addEventListener('DOMContentLoaded', () => {
+            renderSlider();
+        });
+
+        // ระบบ Lightbox แสดงผลรูปภาพขนาดใหญ่เต็มจอเมื่อคลิกที่รูปภาพ
         const lightbox = document.getElementById('lightbox');
         const lightboxImg = document.getElementById('lightbox-img');
 
