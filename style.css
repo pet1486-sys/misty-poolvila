@@ -204,7 +204,7 @@ iframe {
 .btn-group-row {
     display: flex;
     flex-direction: row; 
-    gap: 10px;
+    gap: 8px;
     width: 100%;
     max-width: 600px; 
     justify-content: center;
@@ -215,7 +215,7 @@ iframe {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 12px 15px;
+    padding: 12px 10px;
     border-radius: 14px; 
     font-weight: 500;
     font-size: 13px;
@@ -227,6 +227,7 @@ iframe {
 .btn.fb { background: rgba(255, 255, 255, 0.75); color: #1877F2; border: 1px solid rgba(24, 119, 242, 0.15); box-shadow: 0 4px 10px rgba(24, 119, 242, 0.02); }
 .btn.line { background: rgba(255, 255, 255, 0.75); color: #06C755; border: 1px solid rgba(6, 199, 85, 0.15); box-shadow: 0 4px 10px rgba(6, 199, 85, 0.02); }
 .btn.phone { background: rgba(255, 255, 255, 0.75); color: #334155; border: 1px solid rgba(51, 65, 85, 0.15); box-shadow: 0 4px 10px rgba(51, 65, 85, 0.02); }
+.btn.map { background: rgba(255, 255, 255, 0.75); color: #ea4335; border: 1px solid rgba(234, 67, 53, 0.15); box-shadow: 0 4px 10px rgba(234, 67, 53, 0.02); }
 
 .btn:hover {
     transform: translateY(-2px);
@@ -235,20 +236,19 @@ iframe {
 }
 
 /* =========================================================================
-     📸 5. MEDIA WORKSPACE ROW (แสดงผลแบบซ้าย-ขวา คู่กันตลอดเวลา)
+     📸 5. MEDIA WORKSPACE ROW
      ========================================================================= */
 .media-workspace-row {
     display: flex;
     flex-direction: row; 
     justify-content: center;
-    align-items: stretch; /* ให้ส่วนสูงกล่องซ้ายและขวาขยายเท่ากัน */
+    align-items: stretch; 
     gap: 15px;
     width: 100%;
     max-width: 950px; 
     margin-top: 5px;
 }
 
-/* ⬅️ ฝั่งซ้าย: กล่องภาพสไลด์แนวตั้ง (ทรง Portrait สูงโปร่งยาวเต็มตา) */
 .slider-container-box {
     flex: 2.2; 
     display: flex;
@@ -263,7 +263,7 @@ iframe {
     border-radius: 20px;
     overflow: hidden;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
-    aspect-ratio: 0.8 / 1; /* อัตราส่วนเป็นแนวตั้งสไตล์พอร์เทรต */
+    aspect-ratio: 0.8 / 1; 
     background: rgba(255, 255, 255, 0.2);
 }
 
@@ -341,12 +341,11 @@ iframe {
     border-radius: 2px;
 }
 
-/* ➡️ ✨ ฝั่งขวา: แผงควบคุมกล่องปุ่มเลือกห้องแนวตั้ง (ปรับให้เว้นระยะกระจายตัวพอดีกล่องซ้าย) */
 .room-selector-side-scroll {
     flex: 0.8; 
     display: flex;
     flex-direction: column; 
-    justify-content: space-between; /* ✨ กระจายระยะห่างของแต่ละห้องพักให้เว้นระยะพอดีกับความสูงฝั่งซ้าย */
+    justify-content: space-between; 
     gap: 10px;
     padding-right: 2px;
     box-sizing: border-box;
@@ -357,7 +356,7 @@ iframe {
     border-radius: 10px;
     padding: 6px 8px;
     border: 1px solid rgba(255,255,255,0.35);
-    flex: 1; /* ช่วยให้แต่ละกล่องห้องแชร์ความสูงเฉลี่ยเท่าๆ กัน */
+    flex: 1; 
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -378,14 +377,12 @@ iframe {
     gap: 4px;
 }
 
-/* ห้องที่ 4 แบ่งเป็น 2 คอลัมน์กะทัดรัด */
 .overflow-wrap-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr); 
     gap: 4px;
 }
 
-/* ปุ่มรูปภาพย่อขนาดจิ๋วพิเศษ */
 .mini-img-btn {
     width: 28px;
     height: 24px;
@@ -412,7 +409,7 @@ iframe {
 }
 
 /* =========================================================================
-     🎥 6. LIGHTBOX SYSTEM STYLES (ปรับโครงสร้างเพื่อใส่ข้อความใต้วิว)
+     🎥 6. LIGHTBOX SYSTEM STYLES
      ========================================================================= */
 .lightbox {
     position: fixed; 
@@ -427,7 +424,6 @@ iframe {
     box-sizing: border-box;
 }
 
-/* กล่องจัดระเบียบภาพและคำอธิบายให้อยู่กลางหน้าจอ */
 .lightbox-content-box {
     display: flex;
     flex-direction: column;
@@ -446,7 +442,6 @@ iframe {
     box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
 }
 
-/* ✨ 🏷️ สไตล์ของแถบแสดงชื่อห้องและลำดับจำนวนรูปภาพด้านล่างรูปใหญ่ */
 .lightbox-caption {
     color: #f8fafc;
     font-size: 14px;
@@ -467,7 +462,6 @@ iframe {
     color: rgba(255, 255, 255, 0.7);
     font-size: 42px;
     cursor: pointer;
-    transition: color 0.2s;
     z-index: 10002;
 }
 .lightbox-close:hover { color: #f43f5e; }
@@ -484,13 +478,12 @@ iframe {
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: all 0.2s;
     z-index: 10001;
 }
 .lightbox-btn:hover { background: #ffffff; color: #0f172a; }
 
 /* =========================================================================
-     📐 7. RESPONSIVE MEDIA QUERIES (เวอร์ชันสำหรับหน้าจอมือถือ)
+     📐 7. RESPONSIVE MEDIA QUERIES
      ========================================================================= */
 @media (max-width: 850px) {
     iframe { 
@@ -506,13 +499,17 @@ iframe {
     .price-list { gap: 4px; }
     .info-card-left p { padding: 8px 4px; font-size: 9px; border-radius: 8px; }
     .info-card-left b { font-size: 11px; }
-    .btn { padding: 10px 4px; font-size: 10px; border-radius: 8px; }
+    
+    .btn-group-row {
+        gap: 4px;
+        flex-wrap: wrap; 
+    }
+    .btn { padding: 10px 6px; font-size: 11px; border-radius: 8px; }
 
-    /* 📱 ล็อกหน้าจอมือถือ ให้ภาพอยู่ซ้ายและกล่องเลือกอยู่ขวาคู่กันเสมอ */
     .media-workspace-row {
         flex-direction: row; 
         gap: 8px;
-        align-items: stretch; /* ยืดกล่องฝั่งขวาบนมือถือให้สูงเท่าฝั่งซ้ายเช่นกัน */
+        align-items: stretch; 
     }
 
     .slider-container-box {
@@ -526,7 +523,6 @@ iframe {
 
     .slider-btn { display: none; } 
 
-    /* แผงปุ่มกดฝั่งขวาแนวตั้งบนมือถือ */
     .room-selector-side-scroll {
         flex: 1; 
         gap: 6px;
@@ -568,4 +564,5 @@ iframe {
 
 @media (max-width: 480px) {
     iframe { height: 300px; }
+    .btn { font-size: 10px; padding: 8px 4px; }
 }

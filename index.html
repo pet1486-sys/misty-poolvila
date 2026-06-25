@@ -45,7 +45,10 @@
                         💬 Line
                     </a>
                     <a class="btn phone" href="tel:0843410869">
-                        📞 โทร: 084-341-0869
+                        📞 โทร
+                    </a>
+                    <a class="btn map" href="https://maps.app.goo.gl/yJsfg9YSJVYUCrbH9" target="_blank">
+                        🗺️ แผนที่
                     </a>
                 </div>
             </div>
@@ -58,8 +61,8 @@
                 <div class="slider-wrapper">
                     <div class="gallery-slider" id="gallerySlider">
                         </div>
-                    <button class="slider-btn prev" onclick="moveSlider(-1)">&#10094;</button>
-                    <button class="slider-btn next" onclick="moveSlider(1)">&#10095;</button>
+                    <button class="slider-btn prev" onclick="moveSlider(-1)">❮</button>
+                    <button class="slider-btn next" onclick="moveSlider(1)">❯</button>
                 </div>
                 <div class="slider-dots" id="sliderDots"></div>
             </div>
@@ -109,17 +112,16 @@
     </div> 
     
     <div class="lightbox" id="lightbox">
-        <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
-        <button class="lightbox-btn lightbox-prev" onclick="moveLightbox(-1)">&#10094;</button>
+        <span class="lightbox-close" onclick="closeLightbox()">×</span>
+        <button class="lightbox-btn lightbox-prev" onclick="moveLightbox(-1)">❮</button>
         <div class="lightbox-content-box">
             <img id="lightbox-img" src="" alt="Enlarged View">
             <div class="lightbox-caption" id="lightboxCaption">room_1.jpg 1/12</div>
         </div>
-        <button class="lightbox-btn lightbox-next" onclick="moveLightbox(1)">&#10095;</button>
+        <button class="lightbox-btn lightbox-next" onclick="moveLightbox(1)">❯</button>
     </div>
 
     <script>
-        // คลังรูปภาพทั้งหมดรวมกันในที่เดียวเป็นสไลด์ยาว เรียงตามลำดับ (0-11)
         const allImages = [
             "images/room_1.jpg", "images/room_1.1.jpg",
             "images/room_2.jpg", "images/room_2.1.jpg",
@@ -133,7 +135,6 @@
         const slider = document.getElementById('gallerySlider');
         const dotsContainer = document.getElementById('sliderDots');
 
-        // ฟังก์ชันสร้างสไลเดอร์รูปภาพทั้งหมดรวมกัน
         function initSlider() {
             let sliderHTML = '';
             allImages.forEach((src, index) => {
@@ -150,7 +151,6 @@
             updateActiveThumbnails();
         }
 
-        // ฟังก์ชันเมื่อกดปุ่มลูกศร เลื่อนภาพทีละภาพ
         function moveSlider(direction) {
             currentSlideIndex += direction;
 
@@ -163,13 +163,11 @@
             updateSlidePosition();
         }
 
-        // ฟังก์ชันเมื่อกดเลือกรูปจากฝั่งขวา หรือกดจุดดอทด้านล่าง
         function goToSlide(slideIndex) {
             currentSlideIndex = slideIndex;
             updateSlidePosition();
         }
 
-        // สั่งให้สไลเดอร์ฝั่งซ้ายเลื่อนไปยังตำแหน่งรูปภาพที่ระบุ
         function updateSlidePosition() {
             const items = slider.querySelectorAll('.slide-item');
             if (items[currentSlideIndex]) {
@@ -182,7 +180,6 @@
             updateDotsAndThumbs();
         }
 
-        // อัปเดตสถานะไฮไลต์ของปุ่มฝั่งขวา
         function updateActiveThumbnails() {
             document.querySelectorAll('.mini-img-btn').forEach(btn => btn.classList.remove('active'));
             
@@ -190,7 +187,6 @@
             if (currentThumb) {
                 currentThumb.classList.add('active');
                 
-                // ให้กล่องสกรอลล์ขยับโฟกัสปุ่มแนวตั้งอัตโนมัติ
                 const container = document.querySelector('.room-selector-side-scroll');
                 container.scrollTo({
                     top: currentThumb.offsetTop - 60,
@@ -208,7 +204,6 @@
             updateActiveThumbnails();
         }
 
-        // ตรวจจับเมื่อผู้ใช้ปัดเลื่อนสไลด์เองด้วยมือ
         let isScrolling;
         slider.addEventListener('scroll', () => {
             window.clearTimeout(isScrolling);
@@ -225,7 +220,6 @@
             }, 100);
         });
 
-        // 🌟 LIGHTBOX ระบบขยายรูปภาพใหญ่ พร้อมดึงชื่อและลำดับรูปภาพ
         const lightbox = document.getElementById('lightbox');
         const lightboxImg = document.getElementById('lightbox-img');
         const lightboxCaption = document.getElementById('lightboxCaption');
@@ -248,15 +242,10 @@
             updateLightboxContent();
         }
 
-        // ฟังก์ชันอัปเดตรูปภาพ ชื่อไฟล์ และลำดับตัวเลขในคลังภาพทั้งหมด (1/12)
         function updateLightboxContent() {
             const imagePath = allImages[currentLightboxIndex];
             lightboxImg.src = imagePath;
-            
-            // แยกชื่อไฟล์ออกมาจาก Path เช่น "images/room_1.jpg" ดึงเฉพาะ "room_1.jpg"
             const fileName = imagePath.substring(imagePath.lastIndexOf('/') + 1);
-            
-            // แสดงข้อมูลผลลัพธ์: ชื่อภาพ ลำดับปัจจุบัน/จำนวนทั้งหมด
             lightboxCaption.textContent = `${fileName} ${currentLightboxIndex + 1}/${allImages.length}`;
         }
 
