@@ -3,6 +3,11 @@
      ========================================================================= */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Prompt:wght@300;400;500;600&display=swap');
 
+* {
+    touch-action: manipulation; /* บล็อกการซูมจากการกดย้ำๆ ในระดับเบราว์เซอร์ */
+    box-sizing: border-box;
+}
+
 body {
     margin: 0;
     padding: 30px 15px;
@@ -43,7 +48,6 @@ body::before {
 .hero-box {
     width: 100%;
     padding: 20px 15px;
-    box-sizing: border-box;
     border-radius: 20px;
     background: rgba(255, 255, 255, 0.5);
     backdrop-filter: blur(20px);
@@ -97,7 +101,6 @@ body::before {
     backdrop-filter: blur(15px);
     border-radius: 24px;
     padding: 12px;
-    box-sizing: border-box;
     border: 1px solid rgba(255, 255, 255, 0.5);
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
 }
@@ -125,7 +128,6 @@ iframe {
 .info-card-left {
     width: 100%;
     padding: 20px;
-    box-sizing: border-box;
     border-radius: 24px;
     background: rgba(255, 255, 255, 0.55);
     backdrop-filter: blur(20px);
@@ -236,7 +238,7 @@ iframe {
 }
 
 /* =========================================================================
-     📸 5. MEDIA WORKSPACE ROW (แสดงผล ซ้าย-ขวา แนวตั้งลื่นไหล)
+     📸 5. MEDIA WORKSPACE ROW
      ========================================================================= */
 .media-workspace-row {
     display: flex;
@@ -249,7 +251,6 @@ iframe {
     margin-top: 5px;
 }
 
-/* ⬅️ ฝั่งซ้าย: สไลเดอร์ทรงแนวตั้ง มีขอบพรีวิวรูปถัดไปยื่นออกมาให้เห็น */
 .slider-container-box {
     flex: 2.2; 
     display: flex;
@@ -268,38 +269,34 @@ iframe {
     background: rgba(255, 255, 255, 0.15);
 }
 
-/* ✨ ปรับปรุงระบบแกลเลอรีสไลเดอร์ให้รองรับระบบ Peek View ภาพถัดไป ลื่นไหล ไม่โยกเยก */
 .gallery-slider {
     display: flex;
     overflow-x: auto;
-    scroll-snap-type: x mandatory; /* ล็อกหน้ากระดาษแบบเฉียบขาด */
+    scroll-snap-type: x mandatory; 
     scroll-behavior: smooth;
     width: 100%;
     height: 100%;
-    padding: 0 40px 0 0; /* ✨ เว้นช่องขอบฝั่งขวาไว้ 40px เพื่อโชว์หัวรูปถัดไปให้เห็น */
-    box-sizing: border-box;
+    padding: 0 40px 0 0; 
     -ms-overflow-style: none;  
     scrollbar-width: none;  
 }
 
 .gallery-slider::-webkit-scrollbar { display: none; }
 
-/* ไอเท็มแต่ละภาพสไลด์ */
 .slide-item {
-    flex: 0 0 100%; /* บังคับขนาดให้เต็มหน้าต่างล็อก */
+    flex: 0 0 100%; 
     width: 100%;
     height: 100%;
-    scroll-snap-align: start; /* ล็อกที่จุดเริ่มต้นของรูปภาพ */
+    scroll-snap-align: start; 
     scroll-snap-stop: always;
-    padding-right: 10px; /* ระยะช่องว่างเล็กๆ คั่นระหว่างภาพ */
-    box-sizing: border-box;
+    padding-right: 10px; 
 }
 
 .gallery-slider img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    border-radius: 16px; /* ใส่ความโค้งมนแยกแต่ละใบให้ดูสวยงาม */
+    border-radius: 16px; 
     cursor: pointer;
 }
 
@@ -324,7 +321,7 @@ iframe {
     box-shadow: 0 4px 10px rgba(0,0,0,0.08);
 }
 .slider-btn.prev { left: 10px; }
-.slider-btn.next { right: 50px; } /* ขยับหลบพื้นที่ของภาพพรีวิว */
+.slider-btn.next { right: 50px; } 
 
 .slider-dots {
     display: flex;
@@ -348,72 +345,91 @@ iframe {
     border-radius: 2px;
 }
 
-/* ➡️ ฝั่งขวา: แผงควบคุมกล่องปุ่มเลือกห้องแนวตั้ง */
+/* ส่วนขวา: รายการเลือกห้องพัก */
 .room-selector-side-scroll {
-    flex: 0.8; 
+    flex: 0.9; 
     display: flex;
     flex-direction: column; 
-    justify-content: space-between; 
-    gap: 10px;
-    padding-right: 2px;
-    box-sizing: border-box;
+    gap: 12px;
+    overflow-y: auto;
+    max-height: 500px;
+    padding-right: 4px;
 }
 
 .room-thumb-group {
     background: rgba(255, 255, 255, 0.45);
-    border-radius: 10px;
-    padding: 6px 8px;
+    border-radius: 12px;
+    padding: 8px 10px;
     border: 1px solid rgba(255,255,255,0.35);
-    flex: 1; 
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
 }
 
 .group-label {
     display: block;
-    font-size: 10px;
+    font-size: 11px;
     font-weight: 600;
-    color: #64748b;
-    margin-bottom: 4px;
-    font-family: 'Prompt', sans-serif;
+    color: #475569;
+    margin-bottom: 6px;
 }
 
 .thumb-grid {
     display: flex;
     flex-wrap: wrap;
-    gap: 4px;
+    gap: 8px;
 }
 
 .overflow-wrap-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr); 
-    gap: 4px;
+    gap: 8px;
+}
+
+/* กล่องไอเท็มรูปย่อ + ชื่อภาพด้านใต้ */
+.thumb-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+    min-width: 45px;
 }
 
 .mini-img-btn {
-    width: 28px;
-    height: 24px;
+    width: 100%;
+    height: 32px;
     object-fit: cover;
     border-radius: 4px;
     cursor: pointer;
     border: 1.5px solid rgba(100, 116, 139, 0.2);
-    box-shadow: 0 1px 3px rgba(0,0,0,0.02);
-    transition: all 0.15s ease;
     opacity: 0.75;
+    transition: all 0.15s ease;
 }
 
 .mini-img-btn:hover {
     opacity: 1;
     border-color: #1877F2;
-    transform: scale(1.05);
 }
 
 .mini-img-btn.active {
     border-color: #1877F2;
     opacity: 1;
-    box-shadow: 0 2px 6px rgba(24, 119, 242, 0.3);
-    transform: scale(1.02);
+    box-shadow: 0 2px 6px rgba(24, 119, 242, 0.25);
+}
+
+/* กล่องชื่อภาพใต้รูปย่อ */
+.thumb-caption {
+    font-size: 9px;
+    color: #64748b;
+    text-align: center;
+    margin-top: 3px;
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-family: 'Inter', sans-serif;
+}
+
+.mini-img-btn.active + .thumb-caption {
+    color: #1877F2;
+    font-weight: 500;
 }
 
 /* =========================================================================
@@ -422,14 +438,13 @@ iframe {
 .lightbox {
     position: fixed; 
     inset: 0; 
-    background: rgba(15, 23, 42, 0.96);
+    background: rgba(15, 23, 42, 0.98);
     backdrop-filter: blur(12px); 
     display: none; 
     justify-content: space-between;
     align-items: center; 
     z-index: 9999;
     padding: 0 20px;
-    box-sizing: border-box;
 }
 
 .lightbox-content-box {
@@ -437,30 +452,52 @@ iframe {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 15px;
-    max-width: 80%;
+    gap: 20px;
+    width: 100%;
+    max-width: 800px;
     z-index: 10000;
+}
+
+.lightbox-slider-window {
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+}
+
+.lightbox-slider-wrapper {
+    display: flex;
+    width: 100%;
+}
+
+.lightbox-slide-item {
+    flex: 0 0 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .lightbox img { 
     max-width: 100%; 
-    max-height: 75vh; 
-    border-radius: 16px; 
+    max-height: 70vh; 
+    border-radius: 12px; 
     user-select: none;
+    pointer-events: none; 
     box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+    object-fit: contain;
 }
 
 .lightbox-caption {
     color: #f8fafc;
-    font-size: 14px;
+    font-size: 15px;
     font-weight: 400;
-    font-family: 'Inter', -apple-system, sans-serif;
-    background: rgba(0, 0, 0, 0.4);
-    padding: 6px 16px;
+    background: rgba(0, 0, 0, 0.6);
+    padding: 8px 20px;
     border-radius: 20px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    letter-spacing: 0.5px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    text-align: center;
 }
 
 .lightbox-close {
@@ -487,6 +524,7 @@ iframe {
     align-items: center;
     justify-content: center;
     z-index: 10001;
+    flex-shrink: 0;
 }
 .lightbox-btn:hover { background: #ffffff; color: #0f172a; }
 
@@ -514,7 +552,6 @@ iframe {
     }
     .btn { padding: 10px 6px; font-size: 11px; border-radius: 8px; }
 
-    /* ล็อกหน้าจอมือถือ ให้ภาพอยู่ซ้ายและกล่องเลือกอยู่ขวาคู่กันเสมอ */
     .media-workspace-row {
         flex-direction: row; 
         gap: 8px;
@@ -522,7 +559,7 @@ iframe {
     }
 
     .slider-container-box {
-        flex: 2.1; 
+        flex: 1.8; 
     }
 
     .slider-wrapper {
@@ -532,21 +569,20 @@ iframe {
 
     .slider-btn { display: none; } 
 
-    /* ปรับแต่งความกว้างพรีวิวภาพถัดไปบนมือถือให้สมดุลพอดีสายตา */
     .gallery-slider {
-        padding-right: 25px; /* ลดระยะพรีวิวลงมาหน่อยเพื่อให้รูปหลักแสดงเต็มขึ้นบนจอมือถือ */
+        padding-right: 25px; 
     }
     .slide-item {
         padding-right: 6px;
     }
 
     .room-selector-side-scroll {
-        flex: 1; 
+        flex: 1.2; 
         gap: 6px;
     }
 
     .room-thumb-group {
-        padding: 4px 5px;
+        padding: 5px 6px;
         border-radius: 8px;
     }
 
@@ -556,27 +592,34 @@ iframe {
     }
 
     .thumb-grid {
-        gap: 2px;
+        gap: 4px;
     }
 
     .overflow-wrap-grid {
         grid-template-columns: repeat(2, 1fr); 
-        gap: 2px;
+        gap: 4px;
     }
 
     .mini-img-btn { 
-        width: 22px;
-        height: 18px;
-        border-width: 1px;
-        border-radius: 3px;
+        height: 24px;
     }
 
-    .lightbox-content-box {
-        max-width: 90%;
+    .thumb-caption {
+        font-size: 8px;
+        margin-top: 2px;
     }
-    .lightbox img { max-height: 65vh; }
-    .lightbox-caption { font-size: 12px; padding: 4px 12px; }
-    .lightbox-close { top: 15px; right: 20px; font-size: 32px; }
+
+    .lightbox {
+        padding: 0 10px;
+    }
+    .lightbox-content-box {
+        max-width: 95%;
+        gap: 15px;
+    }
+    .lightbox img { max-height: 60vh; }
+    .lightbox-caption { font-size: 13px; padding: 6px 14px; }
+    .lightbox-close { top: 15px; right: 20px; font-size: 36px; }
+    .lightbox-btn { display: none; } 
 }
 
 @media (max-width: 480px) {
